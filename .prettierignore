@@ -1,3 +1,4 @@
 dist/
 examples/
+**/lib/esm/
 __mocks__/
