@@ -1,9 +1,16 @@
-# React-Grid-Layout
+# React-Grid-Layout-Next
 
-[![travis build](https://travis-ci.org/STRML/react-grid-layout.svg?branch=master)](https://travis-ci.org/STRML/react-grid-layout)
-[![CDNJS](https://img.shields.io/cdnjs/v/react-grid-layout.svg)](https://cdnjs.com/libraries/react-grid-layout)
-[![npm package](https://img.shields.io/npm/v/react-grid-layout.svg?style=flat-square)](https://www.npmjs.org/package/react-grid-layout)
-[![npm downloads](https://img.shields.io/npm/dt/react-grid-layout.svg?maxAge=2592000)]()
+## A fork for [react-grid-layout](https://github.com/react-grid-layout/react-grid-layout) with following modifications (and motivations) 
+- Functional react in Typescript instead of Javascript + Flow
+- Support for React 18
+- Z-index for better handling of overlapping grid items
+- Faster iteration on new features
+
+---
+
+[![CDNJS](https://img.shields.io/cdnjs/v/react-grid-layout-next.svg)](https://cdnjs.com/libraries/react-grid-layout-next)
+[![npm package](https://img.shields.io/npm/v/react-grid-layout-next.svg?style=flat-square)](https://www.npmjs.org/package/react-grid-layout-next)
+[![npm downloads](https://img.shields.io/npm/dt/react-grid-layout-next.svg?maxAge=2592000)]()
 
 React-Grid-Layout is a grid layout system much like [Packery](http://packery.metafizzy.co/) or
 [Gridster](http://dsmorse.github.io/gridster.js/), for React.
