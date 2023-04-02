@@ -1,7 +1,7 @@
 # React-Grid-Layout-Next
 
 ## A fork for [react-grid-layout](https://github.com/react-grid-layout/react-grid-layout) with following modifications (and motivations) 
-- Functional react in Typescript instead of Javascript + Flow
+- Functional React in Typescript instead of Javascript + Flow
 - Support for React 18
 - Z-index for better handling of overlapping grid items
 - Faster iteration on new features
