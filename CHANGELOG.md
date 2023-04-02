@@ -177,7 +177,7 @@ React-Grid-Layout has been in `0.x` status for far too long. With the addition o
 
 - `onDrop` callback now has a form more consistent with other callbacks.
   - Previous type: `(elemParams: { x: number, y: number, w: number, h: number, e: Event }) => void`
-  - New type: `(layout: Layout, item: ?LayoutItem, e: Event) => void`
+  - New type: `(layout: Layout, item?: LayoutItem, e: Event) => void`
   - Thanks @ceberhar [#1169](https://github.com/STRML/react-grid-layout/pull/1169)
 - Dropping Node 8 compatibility and testing due to devDep incompatibilities
 

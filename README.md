@@ -130,7 +130,7 @@ produce a grid with three items where:
 - users will be able to freely drag and resize item `c`
 
 ```js
-import GridLayout from "react-grid-layout";
+import GridLayout from "react-grid-layout-next";
 
 class MyFirstGrid extends React.Component {
   render() {
@@ -160,7 +160,7 @@ class MyFirstGrid extends React.Component {
 You may also choose to set layout properties directly on the children:
 
 ```js
-import GridLayout from "react-grid-layout";
+import GridLayout from "react-grid-layout-next";
 
 class MyFirstGrid extends React.Component {
   render() {
@@ -191,7 +191,7 @@ excludes `React`, so it must be otherwise available in your application, either 
 To make RGL responsive, use the `<ResponsiveReactGridLayout>` element:
 
 ```js
-import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
+import { Responsive as ResponsiveGridLayout } from "react-grid-layout-next";
 
 class MyResponsiveGrid extends React.Component {
   render() {
@@ -231,7 +231,7 @@ positions on drag events. In simple cases a HOC `WidthProvider` can be used to a
 width upon initialization and window resize events.
 
 ```js
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive, WidthProvider } from "react-grid-layout-next";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -279,24 +279,24 @@ RGL supports the following properties (see the source for the final word on this
 width: number,
 
 // If true, the container height swells and contracts to fit contents
-autoSize: ?boolean = true,
+autoSize?: boolean = true,
 
 // Number of columns in this layout.
-cols: ?number = 12,
+cols?: number = 12,
 
 // A CSS selector for tags that will not be draggable.
 // For example: draggableCancel:'.MyNonDraggableAreaClassName'
 // If you forget the leading . it will not work.
 // .react-resizable-handle" is always prepended to this value.
-draggableCancel: ?string = '',
+draggableCancel?: string = '',
 
 // A CSS selector for tags that will act as the draggable handle.
 // For example: draggableHandle:'.MyDragHandleClassName'
 // If you forget the leading . it will not work.
-draggableHandle: ?string = '',
+draggableHandle?: string = '',
 
 // Compaction type.
-compactType: ?('vertical' | 'horizontal') = 'vertical';
+compactType?: ('vertical' | 'horizontal') = 'vertical';
 
 // Layout is an array of object with the format:
 // {x: number, y: number, w: number, h: number}
@@ -304,17 +304,17 @@ compactType: ?('vertical' | 'horizontal') = 'vertical';
 // If you choose to use custom keys, you can specify that key in the layout
 // array objects like so:
 // {i: string, x: number, y: number, w: number, h: number}
-layout: ?array = null, // If not provided, use data-grid props on children
+layout?: array = null, // If not provided, use data-grid props on children
 
 // Margin between items [x, y] in px.
-margin: ?[number, number] = [10, 10],
+margin?: [number, number] = [10, 10],
 
 // Padding inside the container [x, y] in px
-containerPadding: ?[number, number] = margin,
+containerPadding?: [number, number] = margin,
 
 // Rows have a static height, but you can change this based on breakpoints
 // if you like.
-rowHeight: ?number = 150,
+rowHeight?: number = 150,
 
 // Configuration of a dropping element. Dropping element is a "virtual" element
 // which appears when you drag over some element from outside.
@@ -327,24 +327,24 @@ droppingItem?: { i: string, w: number, h: number }
 //
 // Flags
 //
-isDraggable: ?boolean = true,
-isResizable: ?boolean = true,
-isBounded: ?boolean = false,
+isDraggable?: boolean = true,
+isResizable?: boolean = true,
+isBounded?: boolean = false,
 // Uses CSS3 translate() instead of position top/left.
 // This makes about 6x faster paint performance
-useCSSTransforms: ?boolean = true,
+useCSSTransforms?: boolean = true,
 // If parent DOM node of ResponsiveReactGridLayout or ReactGridLayout has "transform: scale(n)" css property,
 // we should set scale coefficient to avoid render artefacts while dragging.
-transformScale: ?number = 1,
+transformScale?: number = 1,
 
 // If true, grid can be placed one over the other.
 // If set, implies `preventCollision`.
-allowOverlap: ?boolean = false,
+allowOverlap?: boolean = false,
 
 // If true, grid items won't change position when being
 // dragged over. If `allowOverlap` is still false,
 // this simply won't allow one to drop on an existing object.
-preventCollision: ?boolean = false,
+preventCollision?: boolean = false,
 
 // If true, droppable elements (with `draggable={true}` attribute)
 // can be dropped on the grid. It triggers "onDrop" callback
@@ -356,7 +356,7 @@ preventCollision: ?boolean = false,
 // along with `draggable={true}` otherwise this feature will work incorrect.
 // onDragStart attribute is required for Firefox for a dragging initialization
 // @see https://bugzilla.mozilla.org/show_bug.cgi?id=568313
-isDroppable: ?boolean = false,
+isDroppable?: boolean = false,
 // Defines which resize handles should be rendered
 // Allows for any combination of:
 // 's' - South handle (bottom-center)
@@ -367,7 +367,7 @@ isDroppable: ?boolean = false,
 // 'nw' - Northwest handle (top-left)
 // 'se' - Southeast handle (bottom-right)
 // 'ne' - Northeast handle (top-right)
-resizeHandles: ?Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'> = ['se'],
+resizeHandles?: Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'> = ['se'],
 // Custom component for resize handles
 // See `handle` as used in https://github.com/react-grid-layout/react-resizable#resize-handle
 // Your component should have the class `.react-resizable-handle`, or you should add your custom
@@ -407,7 +407,7 @@ onResizeStop: ItemCallback,
 //
 
 // Calls when an element has been dropped into the grid from outside.
-onDrop: (layout: Layout, item: ?LayoutItem, e: Event) => void,
+onDrop: (layout: Layout, item?: LayoutItem, e: Event) => void,
 // Calls when an element is being dragged over the grid from outside as above.
 // This callback should return an object to dynamically change the droppingItem size
 // Return false to short-circuit the dragover
@@ -428,10 +428,10 @@ The new properties and changes are:
 ```js
 // {name: pxVal}, e.g. {lg: 1200, md: 996, sm: 768, xs: 480}
 // Breakpoint names are arbitrary but must match in the cols and layouts objects.
-breakpoints: ?Object = {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0},
+breakpoints?: Object = {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0},
 
 // # of cols. This is a breakpoint -> cols map, e.g. {lg: 12, md: 10, ...}
-cols: ?Object = {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
+cols?: Object = {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
 
 
 // margin (in pixels). Can be specified either as horizontal and vertical margin, e.g. `[10, 10]` or as a breakpoint -> margin map, e.g. `{lg: [10, 10], md: [10, 10], ...}.
@@ -492,22 +492,22 @@ will be draggable, even if the item is marked `static: true`.
   y: number,
   w: number,
   h: number,
-  minW: ?number = 0,
-  maxW: ?number = Infinity,
-  minH: ?number = 0,
-  maxH: ?number = Infinity,
+  minW?: number = 0,
+  maxW?: number = Infinity,
+  minH?: number = 0,
+  maxH?: number = Infinity,
 
   // If true, equal to `isDraggable: false, isResizable: false`.
-  static: ?boolean = false,
+  static?: boolean = false,
   // If false, will not be draggable. Overrides `static`.
-  isDraggable: ?boolean = true,
+  isDraggable?: boolean = true,
   // If false, will not be resizable. Overrides `static`.
-  isResizable: ?boolean = true,
+  isResizable?: boolean = true,
   // By default, a handle is only shown on the bottom-right (southeast) corner.
   // Note that resizing from the top or left is generally not intuitive.
-  resizeHandles?: ?Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'> = ['se']
+  resizeHandles??: Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'> = ['se']
   // If true and draggable, item will be moved only within grid.
-  isBounded: ?boolean = false
+  isBounded?: boolean = false
 }
 ```
 
