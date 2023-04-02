@@ -1,6 +1,6 @@
 # Changelog
 
-## Fork: react-grid-layout-next (2.0.0)
+## Fork: react-grid-layout-next (2.0.2)
 
 - Rewrite in functional React in Typescript
 - Add z coordinate for better handling overlapping grid item
