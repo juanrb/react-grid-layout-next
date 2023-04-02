@@ -38,7 +38,7 @@ const ReactGridLayout = (properties) => {
     const [children, setChildren] = useState(properties.children);
     const [layout, setLayout] = useState(synchronizeLayoutWithChildren(properties.layout || [], children, cols, compactType, allowOverlap));
     /*     const [compactTypeState, setCompactTypeState] = useState<CompactType>()
-        const [propsLayout, setPropsLayout] = useState<Layout>() */
+          const [propsLayout, setPropsLayout] = useState<Layout>() */
     const dragEnterCounter = useRef(0);
     useEffect(() => {
         setMounted(true);
@@ -52,13 +52,13 @@ const ReactGridLayout = (properties) => {
         compactType, allowOverlap));
     }, [JSON.stringify(properties.layout)]);
     /*   componentDidUpdate(prevProps: Props, prevState: State) {
-          if (!this.state.activeDrag) {
-              const newLayout = this.state.layout;
-              const oldLayout = prevState.layout;
-  
-              this.onLayoutMaybeChanged(newLayout, oldLayout);
-          }
-      } */
+            if (!this.state.activeDrag) {
+                const newLayout = this.state.layout;
+                const oldLayout = prevState.layout;
+    
+                this.onLayoutMaybeChanged(newLayout, oldLayout);
+            }
+        } */
     useEffect(() => {
         const newLayout = synchronizeLayoutWithChildren(properties.layout || layout, properties.children, properties.cols || cols, properties.compactType, properties.allowOverlap);
         setLayout(newLayout);
@@ -75,10 +75,7 @@ const ReactGridLayout = (properties) => {
         const containerPaddingY = containerPadding
             ? containerPadding[1]
             : margin[1];
-        return (nbRow * rowHeight +
-            (nbRow - 1) * margin[1] +
-            containerPaddingY * 2 +
-            "px");
+        return (nbRow * rowHeight + (nbRow - 1) * margin[1] + containerPaddingY * 2 + "px");
     };
     /**
      * When dragging starts
@@ -88,7 +85,7 @@ const ReactGridLayout = (properties) => {
      * @param {Event} e The mousedown event
      * @param {Element} node The current dragging DOM element
      */
-    const onDragStartFn = (properties) => {
+    const onDragStartFn = properties => {
         const l = getLayoutItem(layout, properties.i);
         if (!l)
             return;
@@ -104,7 +101,7 @@ const ReactGridLayout = (properties) => {
      * @param {Event} e The mousedown event
      * @param {Element} node The current dragging DOM element
      */
-    const onDragFn = (properties) => {
+    const onDragFn = properties => {
         const l = getLayoutItem(layout, properties.i);
         if (!l)
             return;
@@ -132,9 +129,7 @@ const ReactGridLayout = (properties) => {
             allowOverlap
         });
         onDrag(newLayout, oldDragItem, l, placeholder, properties.data.e, properties.data.node);
-        setLayout(allowOverlap
-            ? newLayout
-            : compact(newLayout, compactType, cols));
+        setLayout(allowOverlap ? newLayout : compact(newLayout, compactType, cols));
         setActiveDrag(placeholder);
     };
     /**
@@ -145,7 +140,7 @@ const ReactGridLayout = (properties) => {
      * @param {Event} e The mousedown event
      * @param {Element} node The current dragging DOM element
      */
-    const onDragStopFn = (properties) => {
+    const onDragStopFn = properties => {
         if (!activeDrag)
             return;
         const l = getLayoutItem(layout, properties.i);
@@ -187,7 +182,7 @@ const ReactGridLayout = (properties) => {
             onLayoutChange(newLayout);
         }
     };
-    const onResizeStartFn = (properties) => {
+    const onResizeStartFn = properties => {
         const l = getLayoutItem(layout, properties.i);
         if (!l)
             return;
@@ -195,13 +190,17 @@ const ReactGridLayout = (properties) => {
         setOldLayout(layout);
         onResizeStart(layout, l, l, undefined, properties.data.e, properties.data.node);
     };
-    const onResizeFn = (properties) => {
+    const onResizeFn = properties => {
         const [newLayout, l] = withLayoutItem(layout, properties.i, l => {
             // Something like quad tree should be used
             // to find collisions faster
             let hasCollisions;
             if (preventCollision && !allowOverlap) {
-                const collisions = getAllCollisions(layout, { ...l, w: properties.x, h: properties.y }).filter(layoutItem => layoutItem.i !== l.i);
+                const collisions = getAllCollisions(layout, {
+                    ...l,
+                    w: properties.x,
+                    h: properties.y
+                }).filter(layoutItem => layoutItem.i !== l.i);
                 hasCollisions = collisions.length > 0;
                 // If we're colliding, we need adjust the placeholder.
                 if (hasCollisions) {
@@ -241,14 +240,11 @@ const ReactGridLayout = (properties) => {
         };
         onResize(newLayout, oldResizeItem, l, placeholder, properties.data.e, properties.data.node);
         // Re-compact the newLayout and set the drag placeholder.
-        setLayout(allowOverlap
-            ? newLayout
-            : compact(newLayout, compactType, cols));
+        setLayout(allowOverlap ? newLayout : compact(newLayout, compactType, cols));
         setActiveDrag(placeholder);
     };
-    const onResizeStopFn = (properties) => {
+    const onResizeStopFn = properties => {
         const l = getLayoutItem(layout, properties.i);
-        console.log(properties);
         onResizeStop(layout, oldResizeItem, l, undefined, properties.data.e, properties.data.node);
         // Set state
         const newLayout = allowOverlap
@@ -395,10 +391,11 @@ const ReactGridLayout = (properties) => {
         height: containerHeight(),
         ...style
     };
-    return (_jsxs("div", { ref: innerRef, className: mergedClassName, style: mergedStyle, onDrop: isDroppable ? onDropFn : noop, onDragLeave: isDroppable ? onDragLeaveFn : noop, onDragEnter: isDroppable ? onDragEnterFn : noop, onDragOver: isDroppable ? onDragOverFn : noop, children: [children && (Array.isArray(children) ? React.Children.map(children, child => processGridItem(child)) : processGridItem(children)) // TODO fix types
-            , isDroppable &&
-                droppingDOMNode &&
-                processGridItem(droppingDOMNode, true), placeholder()] }));
+    return (_jsxs("div", { ref: innerRef, className: mergedClassName, style: mergedStyle, onDrop: isDroppable ? onDropFn : noop, onDragLeave: isDroppable ? onDragLeaveFn : noop, onDragEnter: isDroppable ? onDragEnterFn : noop, onDragOver: isDroppable ? onDragOverFn : noop, children: [children &&
+                (Array.isArray(children)
+                    ? React.Children.map(children, child => processGridItem(child))
+                    : processGridItem(children)) // TODO fix types
+            , isDroppable && droppingDOMNode && processGridItem(droppingDOMNode, true), placeholder()] }));
 };
 ReactGridLayout.displayName = "ReactGridLayout";
 export default ReactGridLayout;

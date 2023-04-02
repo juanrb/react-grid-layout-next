@@ -1,5 +1,12 @@
 # Changelog
 
+## Fork: react-grid-layout-next (2.0.0)
+
+- Rewrite in functional React in Typescript
+- Add z coordinate for better handling overlapping grid item
+- Fix bug where onLayoutChange is not called when overlapping=true
+
+
 ## 1.3.4 (Feb 21, 2022)
 
 ### Bugfixes

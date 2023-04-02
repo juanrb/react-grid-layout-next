@@ -192,7 +192,8 @@ export function compactItem(compareWith, l, compactType, cols, fullLayout, allow
     // Move it down, and keep moving it down if it's colliding.
     let collides;
     // Checking the compactType null value to avoid breaking the layout when overlapping is allowed.
-    while ((collides = getFirstCollision(compareWith, l)) && !(compactType === null && allowOverlap)) {
+    while ((collides = getFirstCollision(compareWith, l)) &&
+        !(compactType === null && allowOverlap)) {
         if (compactH) {
             resolveCompactionCollision(fullLayout, l, collides.x + collides.w, "x");
         }
@@ -298,7 +299,8 @@ export function getStatics(layout) {
  * @param  {Number}     [y]               Y position in grid units.
  */
 export function moveElement(properties) {
-    let { l, layout, x, y, z, isUserAction, preventCollision, cols, compactType, allowOverlap } = properties;
+    const { l, x, y, z, isUserAction, preventCollision, cols, compactType, allowOverlap } = properties;
+    let { layout } = properties;
     // If this is static and not explicitly enabled as draggable,
     // no move is possible, so we can short-circuit this immediately.
     if (l.static && l.isDraggable !== true)
@@ -337,7 +339,7 @@ export function moveElement(properties) {
     // allowed overlap.
     if (hasCollisions && allowOverlap) {
         // Easy, we don't need to resolve collisions. But we can make sure the newly movedo item appears on top!
-        let maxZ = Math.max(...collisions.map(x => x.z ?? Number.MIN_SAFE_INTEGER));
+        const maxZ = Math.max(...collisions.map(x => x.z ?? Number.MIN_SAFE_INTEGER));
         l.z = maxZ + 1;
         return cloneLayout(layout);
     }
@@ -392,7 +394,8 @@ export function moveElement(properties) {
  * @param  {LayoutItem} itemToMove   Layout item we're moving.
  */
 export function moveElementAwayFromCollision(properties) {
-    let { collidesWith, cols, compactType, itemToMove, layout, isUserAction } = properties;
+    const { collidesWith, cols, compactType, itemToMove, layout } = properties;
+    let { isUserAction } = properties;
     const compactH = compactType === "horizontal";
     // Compact vertically if not set to horizontal
     const compactV = compactType !== "horizontal";
@@ -532,43 +535,44 @@ export function synchronizeLayoutWithChildren(initialLayout, children, cols, com
     initialLayout = initialLayout || [];
     // Generate one layout item per child.
     const layout = [];
-    children && React.Children.forEach(Array.isArray(children) ? children : [children], (child) => {
-        // Child may not exist
-        if (child?.key == null)
-            return;
-        // Don't overwrite if it already exists.
-        const exists = getLayoutItem(initialLayout, String(child.key));
-        if (exists) {
-            layout.push(cloneLayoutItem(exists));
-        }
-        else {
-            if (!isProduction && child.props._grid) {
-                console.warn("`_grid` properties on children have been deprecated as of React 15.2. " +
-                    "Please use `data-grid` or add your properties directly to the `layout`.");
-            }
-            const g = child.props["data-grid"] || child.props._grid;
-            // Hey, this item has a data-grid property, use it.
-            if (g) {
-                if (!isProduction) {
-                    validateLayout([g], "ReactGridLayout.children");
-                }
-                // FIXME clone not really necessary here
-                layout.push(cloneLayoutItem({ ...g, i: child.key }));
+    children &&
+        React.Children.forEach(Array.isArray(children) ? children : [children], (child) => {
+            // Child may not exist
+            if (child?.key == null)
+                return;
+            // Don't overwrite if it already exists.
+            const exists = getLayoutItem(initialLayout, String(child.key));
+            if (exists) {
+                layout.push(cloneLayoutItem(exists));
             }
             else {
-                // Nothing provided: ensure this is added to the bottom
-                // FIXME clone not really necessary here
-                layout.push(cloneLayoutItem({
-                    w: 1,
-                    h: 1,
-                    x: 0,
-                    y: bottom(layout),
-                    z: 0,
-                    i: String(child.key)
-                }));
+                if (!isProduction && child.props._grid) {
+                    console.warn("`_grid` properties on children have been deprecated as of React 15.2. " +
+                        "Please use `data-grid` or add your properties directly to the `layout`.");
+                }
+                const g = child.props["data-grid"] || child.props._grid;
+                // Hey, this item has a data-grid property, use it.
+                if (g) {
+                    if (!isProduction) {
+                        validateLayout([g], "ReactGridLayout.children");
+                    }
+                    // FIXME clone not really necessary here
+                    layout.push(cloneLayoutItem({ ...g, i: child.key }));
+                }
+                else {
+                    // Nothing provided: ensure this is added to the bottom
+                    // FIXME clone not really necessary here
+                    layout.push(cloneLayoutItem({
+                        w: 1,
+                        h: 1,
+                        x: 0,
+                        y: bottom(layout),
+                        z: 0,
+                        i: String(child.key)
+                    }));
+                }
             }
-        }
-    });
+        });
     // Correct the layout.
     const correctedLayout = correctBounds(layout, { cols: cols });
     return allowOverlap
@@ -607,5 +611,5 @@ function log(...args) {
     // eslint-disable-next-line no-console
     console.log(...args);
 }
-export const noop = (_args) => { };
+export const noop = (_args) => undefined;
 //# sourceMappingURL=utils.js.map

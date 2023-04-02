@@ -190,8 +190,8 @@ export declare function moveElementAwayFromCollision(properties: {
  * @return {String}     That number as a percentage.
  */
 export declare function perc(num: number): string;
-export declare function setTransform({ top, left, z, width, height }: Position): Object;
-export declare function setTopLeft({ top, left, z, width, height }: Position): Object;
+export declare function setTransform({ top, left, z, width, height }: Position): Record<string, string | number>;
+export declare function setTopLeft({ top, left, z, width, height }: Position): Record<string, string | number>;
 /**
  * Get layout items sorted from top left to right and down.
  *

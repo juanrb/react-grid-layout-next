@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 const layoutClassName = "react-grid-layout";
 /*
@@ -13,7 +13,7 @@ export const WidthProvideRGL = (ComposedComponent) => {
         const elementRef = useRef(null);
         const [mounted, setMounted] = useState(false);
         const [state, setState] = useState({
-            width: 1280,
+            width: 1280
         });
         const { measureBeforeMount = false } = props;
         useEffect(() => {
@@ -43,7 +43,7 @@ export const WidthProvideRGL = (ComposedComponent) => {
                 // $FlowIgnore ref types
                 ref: elementRef }));
         }
-        return (_jsx(ComposedComponent, { ...props, innerRef: elementRef, ...state }));
+        return _jsx(ComposedComponent, { ...props, innerRef: elementRef, ...state });
     };
 };
 //# sourceMappingURL=WidthProvider.js.map

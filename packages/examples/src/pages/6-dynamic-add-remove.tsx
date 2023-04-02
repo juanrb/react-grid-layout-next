@@ -97,7 +97,6 @@ export default class AddRemoveLayout extends React.PureComponent<ResponsiveProps
     }
 
     onRemoveItem(i) {
-        console.log("removing", i);
         this.setState({ items: _.reject(this.state.items, { i: i }) });
     }
 

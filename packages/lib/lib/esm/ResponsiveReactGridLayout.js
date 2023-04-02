@@ -32,9 +32,12 @@ export const ResponsiveReactGridLayout = (properties) => {
         };
     };
     const [state, setState] = React.useState(generateInitialState());
-    console.log(state.layout.map(x => "i: " + x.i + ", s: " + x.static));
-    React.useEffect(() => { setState(generateInitialState()); }, [JSON.stringify(layouts)]);
-    React.useEffect(() => { onWidthChangeFn(); }, [width, breakpoint, JSON.stringify(breakpoints), JSON.stringify(cols)]);
+    React.useEffect(() => {
+        setState(generateInitialState());
+    }, [JSON.stringify(layouts)]);
+    React.useEffect(() => {
+        onWidthChangeFn();
+    }, [width, breakpoint, JSON.stringify(breakpoints), JSON.stringify(cols)]);
     // wrap layouts so we do not need to pass layouts to child
     const onLayoutChangeFn = (layout) => {
         onLayoutChange(layout, {
@@ -45,8 +48,7 @@ export const ResponsiveReactGridLayout = (properties) => {
     // When the width changes work through breakpoints and reset state with the new width & breakpoint.
     // Width changes are necessary to figure out the widget widths.
     const onWidthChangeFn = () => {
-        const newBreakpoint = breakpoint ||
-            getBreakpointFromWidth(breakpoints, width);
+        const newBreakpoint = breakpoint || getBreakpointFromWidth(breakpoints, width);
         const lastBreakpoint = state.breakpoint;
         const newCols = getColsFromBreakpoint(newBreakpoint, cols);
         const newLayouts = { ...layouts };

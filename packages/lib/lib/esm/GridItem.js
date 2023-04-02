@@ -9,7 +9,7 @@ const GridItem = (props) => {
     const [resizing, setResizing] = useState();
     const [dragging, setDragging] = useState();
     const [dragStart, setDragStart] = useState();
-    const [className, setClassName] = useState(props.className || '');
+    const [className, setClassName] = useState(props.className || "");
     const elementRef = useRef();
     let { cancel = "", handle = "", minH = 1, minW = 1, maxH = Infinity, maxW = Infinity, transformScale = 1, resizeHandles, resizeHandle } = props;
     const moveDroppingItem = (prevProps) => {
@@ -92,8 +92,7 @@ const GridItem = (props) => {
      * @return {Element}          Child wrapped in Draggable.
      */
     const mixinDraggable = (child, isDraggable) => {
-        return (_jsx(DraggableCore, { disabled: !isDraggable, onStart: onDragStart, onDrag: onDrag, onStop: onDragStop, handle: props.handle, cancel: ".react-resizable-handle" +
-                (props.cancel ? "," + props.cancel : ""), scale: props.transformScale, nodeRef: elementRef, children: child }));
+        return (_jsx(DraggableCore, { disabled: !isDraggable, onStart: onDragStart, onDrag: onDrag, onStop: onDragStop, handle: props.handle, cancel: ".react-resizable-handle" + (props.cancel ? "," + props.cancel : ""), scale: props.transformScale, nodeRef: elementRef, children: child }));
     };
     /**
      * Mix a Resizable instance into a child.
@@ -194,7 +193,10 @@ const GridItem = (props) => {
         // Call callback with this data
         const { x, y } = calcXY(positionParams, top, left, w, h);
         return onDrag.call(this, {
-            i, x: x, y: y, data: {
+            i,
+            x: x,
+            y: y,
+            data: {
                 e,
                 node,
                 newPosition
@@ -228,7 +230,7 @@ const GridItem = (props) => {
                 e,
                 node,
                 newPosition,
-                change,
+                change
             }
         });
     };
@@ -279,10 +281,18 @@ const GridItem = (props) => {
         w = clamp(w, minW, maxW);
         h = clamp(h, minH, maxH);
         setResizing(handlerName === "onResizeStop" ? undefined : size);
-        handler.call(this, { i, x: w, y: h, data: { e, node, size } });
+        handler.call(this, {
+            i,
+            x: w,
+            y: h,
+            data: { e, node, size }
+        });
     };
     const { x, y, z, w, h, isDraggable, isResizable, droppingPosition, useCSSTransforms } = props;
-    const pos = calcGridItemPosition(getPositionParams(), x, y, z, w, h, { dragging, resizing });
+    const pos = calcGridItemPosition(getPositionParams(), x, y, z, w, h, {
+        dragging,
+        resizing
+    });
     const child = React.Children.only(props.children);
     // Create the child element. We clone the existing element but modify its className and style.
     let newChild = React.cloneElement(child, {

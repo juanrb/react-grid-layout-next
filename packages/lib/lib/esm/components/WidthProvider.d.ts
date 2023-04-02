@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 type ComposedProps<Config> = {
     measureBeforeMount?: boolean;
     className?: string;
