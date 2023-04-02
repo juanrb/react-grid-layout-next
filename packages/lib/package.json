@@ -8,7 +8,8 @@
     ".": {
       "import": "./lib/esm/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./css/styles.css": "./css/styles.css"
   },
   "files": [
     "lib",
