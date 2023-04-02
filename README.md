@@ -117,13 +117,13 @@ _Know of others? Create a PR to let me know!_
 Install the React-Grid-Layout [package](https://www.npmjs.org/package/react-grid-layout) package using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install react-grid-layout
+npm install react-grid-layout-next
 ```
 
 Include the following stylesheets in your application:
 
 ```
-/node_modules/react-grid-layout/css/styles.css
+/node_modules/react-grid-layout-next/css/styles.css
 /node_modules/react-resizable/css/styles.css
 ```
 
