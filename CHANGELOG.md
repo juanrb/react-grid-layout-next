@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.2
+
+-  Prevent `onBreakpointChange` to call when breakpoints are equal but different objects 
 ## 2.1.1 
 
 - `mounted` in WidthProvider is as ref instead of state
