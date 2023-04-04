@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DraggableCore } from "react-draggable";
 import { Resizable } from "react-resizable";
-import {
-  fastPositionEqual,
-  GridDragStopEvent,
-  perc,
-  setTopLeft,
-  setTransform
-} from "./utils";
+import { GridDragStopEvent, perc, setTopLeft, setTransform } from "./utils";
 import {
   calcGridItemPosition,
   calcGridItemWHPx,
@@ -15,7 +9,8 @@ import {
   calcXY,
   calcWH,
   clamp,
-  resolveRowHeight
+  resolveRowHeight,
+  RowHeight
 } from "./calculateUtils";
 import clsx from "clsx";
 import type { ReactElement, ReactNode } from "react";
@@ -27,7 +22,7 @@ import type {
   Position
 } from "./utils";
 import type { PositionParams } from "./calculateUtils";
-import type { ReactRef, ResizeHandleAxis, ResizeHandle } from "./types";
+import type { ResizeHandleAxis, ResizeHandle } from "./types";
 
 type PartialPosition = { top: number; left: number };
 
@@ -44,7 +39,7 @@ type Props = {
   children: ReactElement<any>;
   margin: [number, number];
   containerPadding: [number, number];
-  rowHeight: number | ((width: number) => number);
+  rowHeight: RowHeight;
   maxRows: number;
   isDraggable: boolean;
   isResizable: boolean;

@@ -27,7 +27,7 @@ import { GridLayout, Props } from "./GridLayout";
  */
 function getIndentationValue<T extends [number, number]>(
   param: Record<string, T> | T | undefined,
-  breakpoint: string
+  breakpoint: Breakpoint
 ): T | undefined {
   if (param == null) return;
   return Array.isArray(param) ? param : param[breakpoint];
@@ -42,30 +42,6 @@ type State = {
 } & StateLayout;
 
 type Modify<T, R> = Omit<T, keyof R> & R;
-
-/* type ResponsiveProps<Breakpoint extends string = string> = Modify<(JSX.LibraryManagedAttributes<typeof GridLayout, React.ComponentProps<typeof GridLayout>>), {
-
-	// Responsive config
-	breakpoint?: Breakpoint,
-	breakpoints: Breakpoints<Breakpoint>,
-	cols: Record<Breakpoint, number>,
-	layouts: ResponsiveLayout<Breakpoint>,
-	width: number,
-	margin: Record<Breakpoint, [number, number]> | [number, number] | undefined,
-	containerPadding: Record<Breakpoint, [number, number]> | [number, number] | undefined,
-
-	// Callbacks
-	onBreakpointChange: (Breakpoint, cols: number) => void,
-	onLayoutChange: OnLayoutChangeCallback,
-	onWidthChange: (
-		containerWidth: number,
-		margin: [number, number],
-		cols: number,
-		containerPadding?: [number, number]
-	) => void
-
-}>
- */
 
 export type ResponsiveProps<Breakpoint extends string = string> = Modify<
   Props,
