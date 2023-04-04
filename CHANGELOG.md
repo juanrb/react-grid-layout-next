@@ -1,10 +1,15 @@
 # Changelog
 
+## 2.1.0
+
+- **Breaking** onLayoutChange callback for responsive layout has been changed into an object with properties
 
 ## 2.0.4
+
 - Include calculateUtils fns in exports
 
 ## 2.0.3 
+
 - Remove default exports
 
 ## Fork: react-grid-layout-next (2.0.2)
