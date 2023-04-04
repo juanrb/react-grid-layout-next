@@ -63,7 +63,7 @@ export type DragOverEvent = MouseEvent & {
 
 // Helpful port from TS
 /* export type Pick<FromType, Properties: { [string]: 0 }> = $Exact<
-    $ObjMapi<Properties, <K, V>(k: K, v: V) => $ElementType<FromType, K>>
+	$ObjMapi<Properties, <K, V>(k: K, v: V) => $ElementType<FromType, K>>
 >;
  */
 
@@ -766,7 +766,7 @@ export function synchronizeLayoutWithChildren(
           // Hey, this item has a data-grid property, use it.
           if (g) {
             if (!isProduction) {
-              validateLayout([g], "ReactGridLayout.children");
+              validateLayout([g], "GridLayout.children");
             }
             // FIXME clone not really necessary here
             layout.push(cloneLayoutItem({ ...g, i: child.key }));
@@ -811,7 +811,7 @@ export function validateLayout(layout: Layout, contextName = "Layout"): void {
     for (let j = 0; j < subProps.length; j++) {
       if (typeof item[subProps[j]] !== "number") {
         throw new Error(
-          "ReactGridLayout: " +
+          "GridLayout: " +
             contextName +
             "[" +
             i +

@@ -138,7 +138,7 @@ try {
  * A reactive, fluid grid layout with draggable, resizable components.
  */
 
-const ReactGridLayout = (properties: Partial<Props>) => {
+const GridLayout = (properties: Partial<Props>) => {
   const {
     autoSize = true,
     cols = 12,
@@ -200,7 +200,7 @@ const ReactGridLayout = (properties: Partial<Props>) => {
     )
   );
   /*     const [compactTypeState, setCompactTypeState] = useState<CompactType>()
-        const [propsLayout, setPropsLayout] = useState<Layout>() */
+		  const [propsLayout, setPropsLayout] = useState<Layout>() */
   const dragEnterCounter = useRef(0);
 
   useEffect(() => {
@@ -224,13 +224,13 @@ const ReactGridLayout = (properties: Partial<Props>) => {
   }, [JSON.stringify(properties.layout)]);
 
   /*   componentDidUpdate(prevProps: Props, prevState: State) {
-          if (!this.state.activeDrag) {
-              const newLayout = this.state.layout;
-              const oldLayout = prevState.layout;
-  
-              this.onLayoutMaybeChanged(newLayout, oldLayout);
-          }
-      } */
+			if (!this.state.activeDrag) {
+				const newLayout = this.state.layout;
+				const oldLayout = prevState.layout;
+    
+				this.onLayoutMaybeChanged(newLayout, oldLayout);
+			}
+		} */
 
   useEffect(() => {
     const newLayout = synchronizeLayoutWithChildren(
@@ -753,5 +753,5 @@ const ReactGridLayout = (properties: Partial<Props>) => {
     </div>
   );
 };
-ReactGridLayout.displayName = "ReactGridLayout";
-export default ReactGridLayout;
+GridLayout.displayName = "GridLayout";
+export { GridLayout };

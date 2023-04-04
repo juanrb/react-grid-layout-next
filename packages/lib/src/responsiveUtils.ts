@@ -46,7 +46,7 @@ export function getColsFromBreakpoint(
 ): number {
   if (!cols[breakpoint]) {
     throw new Error(
-      "ResponsiveReactGridLayout: `cols` entry for breakpoint " +
+      "ResponsiveGridLayout: `cols` entry for breakpoint " +
         breakpoint +
         " is missing!"
     );

@@ -1,18 +1,17 @@
 import React from "react";
 import _ from "lodash";
-import { GridLayout as RGL, Props, WidthProvider } from "react-grid-layout-next";
+import { GridLayout as RGL, WidthProvider } from "react-grid-layout-next";
+import { PropsWithItems } from "./types.js";
 
 const GridLayout = WidthProvider(RGL);
 
-export default class NoDraggingLayout extends React.PureComponent<Partial<Props> & { items: number }, any> {
+export default class PreserveAspectRatio extends React.PureComponent<PropsWithItems, any> {
 	static defaultProps = {
 		className: "layout",
-		isDraggable: false,
-		isResizable: false,
-		items: 3,
-		cols: 12,
-		rowHeight: 30,
-		onLayoutChange: function () { }
+		items: 2,
+		//rowHeight: 1,
+		onLayoutChange: function () { },
+		//cols: 300
 	};
 
 	constructor(props) {
@@ -35,13 +34,14 @@ export default class NoDraggingLayout extends React.PureComponent<Partial<Props>
 	generateLayout() {
 		const p = this.props;
 		return _.map(new Array(p.items), function (item, i) {
-			var y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
+			const y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
 			return {
 				x: (i * 2) % 12,
 				y: Math.floor(i / 6) * y,
 				w: 2,
 				h: y,
-				i: i.toString()
+				i: i.toString(),
+				aspectRatio: 1
 			};
 		});
 	}
@@ -52,13 +52,17 @@ export default class NoDraggingLayout extends React.PureComponent<Partial<Props>
 
 	render() {
 		return (
-			<GridLayout
-				layout={this.state.layout}
-				onLayoutChange={this.onLayoutChange}
-				{...this.props}
-			>
-				{this.generateDOM()}
-			</GridLayout>
+			<div style={{ height: '750px' }}>
+				<GridLayout
+					{...this.props}
+					layout={this.state.layout}
+
+					onLayoutChange={this.onLayoutChange.bind(this)}
+					useCSSTransforms={true}
+				>
+					{this.generateDOM()}
+				</GridLayout>
+			</div >
 		);
 	}
 }

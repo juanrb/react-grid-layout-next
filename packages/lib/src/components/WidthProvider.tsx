@@ -30,7 +30,7 @@ const layoutClassName = "react-grid-layout";
  * The Flow type is pretty janky here. I can't just spread `WPProps` into this returned object - I wish I could - but it triggers
  * a flow bug of some sort that causes it to stop typechecking.
  */
-export const WidthProvideRGL = <Config,>(
+export const WidthProvider = <Config,>(
   ComposedComponent: React.ComponentType<Config>
 ) => {
   return (props: ComposedProps<Config>) => {

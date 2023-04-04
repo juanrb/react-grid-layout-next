@@ -17,7 +17,7 @@ import {
   type Breakpoints,
   Breakpoint
 } from "./responsiveUtils";
-import ReactGridLayout, { Props } from "./ReactGridLayout";
+import { GridLayout, Props } from "./GridLayout";
 
 /**
  * Get a value of margin or containerPadding.
@@ -44,26 +44,26 @@ type State = {
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
-/* type ResponsiveProps<Breakpoint extends string = string> = Modify<(JSX.LibraryManagedAttributes<typeof ReactGridLayout, React.ComponentProps<typeof ReactGridLayout>>), {
+/* type ResponsiveProps<Breakpoint extends string = string> = Modify<(JSX.LibraryManagedAttributes<typeof GridLayout, React.ComponentProps<typeof GridLayout>>), {
 
-    // Responsive config
-    breakpoint?: Breakpoint,
-    breakpoints: Breakpoints<Breakpoint>,
-    cols: Record<Breakpoint, number>,
-    layouts: ResponsiveLayout<Breakpoint>,
-    width: number,
-    margin: Record<Breakpoint, [number, number]> | [number, number] | undefined,
-    containerPadding: Record<Breakpoint, [number, number]> | [number, number] | undefined,
+	// Responsive config
+	breakpoint?: Breakpoint,
+	breakpoints: Breakpoints<Breakpoint>,
+	cols: Record<Breakpoint, number>,
+	layouts: ResponsiveLayout<Breakpoint>,
+	width: number,
+	margin: Record<Breakpoint, [number, number]> | [number, number] | undefined,
+	containerPadding: Record<Breakpoint, [number, number]> | [number, number] | undefined,
 
-    // Callbacks
-    onBreakpointChange: (Breakpoint, cols: number) => void,
-    onLayoutChange: OnLayoutChangeCallback,
-    onWidthChange: (
-        containerWidth: number,
-        margin: [number, number],
-        cols: number,
-        containerPadding?: [number, number]
-    ) => void
+	// Callbacks
+	onBreakpointChange: (Breakpoint, cols: number) => void,
+	onLayoutChange: OnLayoutChangeCallback,
+	onWidthChange: (
+		containerWidth: number,
+		margin: [number, number],
+		cols: number,
+		containerPadding?: [number, number]
+	) => void
 
 }>
  */
@@ -95,9 +95,7 @@ export type ResponsiveProps<Breakpoint extends string = string> = Modify<
   }
 >;
 
-export const ResponsiveReactGridLayout = (
-  properties: Partial<ResponsiveProps>
-) => {
+export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
   const {
     breakpoint,
     compactType,
@@ -228,7 +226,7 @@ export const ResponsiveReactGridLayout = (
   };
 
   return (
-    <ReactGridLayout
+    <GridLayout
       {...properties}
       // $FlowIgnore should allow nullable here due to DefaultProps
       margin={getIndentationValue(margin, state.breakpoint)}

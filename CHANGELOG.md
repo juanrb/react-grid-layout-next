@@ -137,7 +137,7 @@ This organization will grow as time goes on, and also contains the dependencies 
 - You can now customize your resizable handle component as supported by [`react-resizable`](https://github.com/STRML/react-resizable/blob/09fd865c0e1cc570caa8d67e44a2e56172d3d816/examples/ExampleLayout.js#L72). For example:
 
 ```js
-<ReactGridLayout
+<GridLayout
   resizeHandle={<span className="custom-handle custom-handle-se" />}
   {...props}
 />
@@ -213,7 +213,7 @@ React-Grid-Layout has been in `0.x` status for far too long. With the addition o
 
 - `shouldComponentUpdate`:
   - A too-aggressive implementation of `shouldComponentUpdate` was shipped in 0.18.0-0.18.1 ([#1123](https://github.com/STRML/react-grid-layout/pull/1123)), which did not compare the `children` object. While this works well in many simple implementations of RGL, it breaks in more complex applications.
-  - Reference equality of `props.children` and `nextProps.children` is now added to `<ReactGridLayout>` and `<GridItem>`. If you wish to take advantage of the performance improvements from the `shouldComponentUpdate` work, memoize your children.
+  - Reference equality of `props.children` and `nextProps.children` is now added to `<GridLayout>` and `<GridItem>`. If you wish to take advantage of the performance improvements from the `shouldComponentUpdate` work, memoize your children.
   - A section has been added to the [README](/README.md#Performance) explaining how this works.
   - Fixed [#1150](https://github.com/STRML/react-grid-layout/issues/1150), [#1151](https://github.com/STRML/react-grid-layout/issues/1151).
 
@@ -224,14 +224,14 @@ This release contains typedef changes only.
 ### Bugfixes
 
 - Flow types:
-  - Make Props to `<ReactGridLayout>` and `<ResponsiveReactGridLayout>` exact.
+  - Make Props to `<GridLayout>` and `<ResponsiveGridLayout>` exact.
   - Fix loss of props refinement when passing through `WidthProvider`.
   - Fix Flow errors as surfaced in [#1138](https://github.com/STRML/react-grid-layout/pull/1138).
   - Modify examples to use types so that the above type error can't resurface
 
 ## 0.18.0 (Feb 25, 2020)
 
-Thanks to all of our maintainers for this big release. 0.18.0 contains a large number of bugfixes that users have been asking for. Please read the full list so you know what to expect. Some of the biggest improvements include fixing changes of `isResizable`/`isDraggable` without a remount ([#892](https://github.com/STRML/react-grid-layout/pull/892)), fixes to prop changes on `ResponsiveReactGridLayout` ([#1090](https://github.com/STRML/react-grid-layout/pull/1090)), `shouldComponentUpdate` improvements for speed ([#1123](https://github.com/STRML/react-grid-layout/pull/1123)), improvements to droppability ([#1127](https://github.com/STRML/react-grid-layout/pull/1127)), and much more.
+Thanks to all of our maintainers for this big release. 0.18.0 contains a large number of bugfixes that users have been asking for. Please read the full list so you know what to expect. Some of the biggest improvements include fixing changes of `isResizable`/`isDraggable` without a remount ([#892](https://github.com/STRML/react-grid-layout/pull/892)), fixes to prop changes on `ResponsiveGridLayout` ([#1090](https://github.com/STRML/react-grid-layout/pull/1090)), `shouldComponentUpdate` improvements for speed ([#1123](https://github.com/STRML/react-grid-layout/pull/1123)), improvements to droppability ([#1127](https://github.com/STRML/react-grid-layout/pull/1127)), and much more.
 
 ### (Potentially) Breaking Changes
 
@@ -246,7 +246,7 @@ Thanks to all of our maintainers for this big release. 0.18.0 contains a large n
 
 ### Bugfixes
 
-- Fix handling of width changes in `ResponsiveReactGridLayout`. [#1090](https://github.com/STRML/react-grid-layout/pull/1090)
+- Fix handling of width changes in `ResponsiveGridLayout`. [#1090](https://github.com/STRML/react-grid-layout/pull/1090)
   - Fixes ignored changes of breakpoints and columns. See also [issue #1083](https://github.com/STRML/react-grid-layout/issues/1083).
 - Forbid layout change on click without drag. [#1044](https://github.com/STRML/react-grid-layout/pull/1044)
 - Do not mutate `layouts` prop. [#1064](https://github.com/STRML/react-grid-layout/pull/1064)
@@ -284,7 +284,7 @@ Thanks to @daynin and @n1ghtmare for taking an active role in maintaining RGL, a
 - Added ability to drag items into the grid from outside. [#980](https://github.com/STRML/react-grid-layout/pull/980). See [the example](https://react-grid-layout.github.io/react-grid-layout/examples/15-drag-from-outside.html).
   - This is especially exciting as it opens up new "widget toolbox" use cases such as [Example 14](https://react-grid-layout.github.io/react-grid-layout/examples/14-toolbox.html) with more intuitive interaction. Thanks @daynin.
 - `transformScale` prop [#987](https://github.com/STRML/react-grid-layout/pull/987)
-- `<ResponsiveReactGridLayout>` now supports margin-per-breakpoint [#1016](https://github.com/STRML/react-grid-layout/pull/1016)
+- `<ResponsiveGridLayout>` now supports margin-per-breakpoint [#1016](https://github.com/STRML/react-grid-layout/pull/1016)
 
 ### Bugfixes
 
@@ -571,7 +571,7 @@ Thanks to @daynin and @n1ghtmare for taking an active role in maintaining RGL, a
 
 ---
 
-- Prevent extraenous rerenders in `<ResponsiveReactGridLayout>` by using deep equality on layouts.
+- Prevent extraenous rerenders in `<ResponsiveGridLayout>` by using deep equality on layouts.
 
   0.12.6 (Jun 5, 2016)
 
@@ -617,7 +617,7 @@ Thanks to @daynin and @n1ghtmare for taking an active role in maintaining RGL, a
 
 ---
 
-- `<ReactGridLayout>` will no longer animate so severely on mount. See #212.
+- `<GridLayout>` will no longer animate so severely on mount. See #212.
   - If you are using `<WidthProvider>`, you may notice that the container's width still shunts on mount.
     If you like, you may delay mounting by setting `measureBeforeMount={true}` on the wrapped element. This
     will eliminate the mounting animation completely.
@@ -643,7 +643,7 @@ Thanks to @daynin and @n1ghtmare for taking an active role in maintaining RGL, a
 
 ---
 
-- Bugfix: `<ResponsiveReactGridLayout>` was using stale data when synchronizing children with the layout
+- Bugfix: `<ResponsiveGridLayout>` was using stale data when synchronizing children with the layout
   on a breakpoint change.
 
   0.11.0
@@ -662,7 +662,7 @@ This release contains potentially breaking changes so I have updated the minor v
 
 Other changes:
 
-- Bugfix: `<ResponsiveReactGridLayout>` `onLayoutChange` callback data could still be stale.
+- Bugfix: `<ResponsiveGridLayout>` `onLayoutChange` callback data could still be stale.
 - Bugfix: Range error when building layout solely from `_grid` properties.
   - This broke a lot of usage and thus `0.10.11` and `0.10.10` have been unpublished.
 - Removed redundant `isPlaceholder` property from `<GridItem>`.
@@ -672,7 +672,7 @@ Other changes:
 
 ---
 
-- Bugfix: `layouts` param on `<ResponsiveReactGridLayout>`'s `onLayoutChange` could have stale data
+- Bugfix: `layouts` param on `<ResponsiveGridLayout>`'s `onLayoutChange` could have stale data
   for the current breakpoint.
 
   0.10.10
@@ -758,7 +758,7 @@ This long-awaited release provides React 0.14 compatibility and a rewrite of the
 **Breaking changes:**
 
 - `ListensToWidth` replaced with `WidthProvider` which must wrap
-  `<ResponsiveReactGridLayout>` and `<ReactGridLayout>` to provide width data. See doc for example.
+  `<ResponsiveGridLayout>` and `<GridLayout>` to provide width data. See doc for example.
 - Prop `initialWidth` renamed to `width`.
 - Grid Layout keys must be type of string now.
 
@@ -851,7 +851,7 @@ Known bugs:
 
 **Breaking changes:**
 
-- `ReactGridLayout.props.handle` renamed to `ReactGridLayout.props.draggableHandle`.
+- `GridLayout.props.handle` renamed to `GridLayout.props.draggableHandle`.
 
 > This version contains a CSS update. This fixes a visual bug where you may see items quickly reset position
 > and animate back to their original position on load, when you are using CSS transforms. To fix this bug,

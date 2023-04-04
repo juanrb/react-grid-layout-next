@@ -1,5 +1,4 @@
-import ReactGridLayout from "./ReactGridLayout";
-export * from "./ReactGridLayout";
+export * from "./GridLayout";
 export * from "./utils";
 export type {
   Breakpoint,
@@ -8,8 +7,5 @@ export type {
   OnLayoutChangeCallback,
   ResponsiveLayout
 } from "./responsiveUtils";
-import { WidthProvideRGL as WidthProvider } from "./components/WidthProvider";
-import { ResponsiveReactGridLayout as Responsive } from "./ResponsiveReactGridLayout";
-export type { ResponsiveProps } from "./ResponsiveReactGridLayout";
-export { WidthProvider, Responsive };
-export default ReactGridLayout;
+export * from "./components/WidthProvider";
+export * from "./ResponsiveGridLayout";
