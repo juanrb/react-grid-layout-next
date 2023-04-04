@@ -1,6 +1,6 @@
 {
   "name": "react-grid-layout-next",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "A draggable and resizable grid layout with responsive breakpoints, for React.",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
