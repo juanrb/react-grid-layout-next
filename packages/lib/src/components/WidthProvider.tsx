@@ -35,7 +35,7 @@ export const WidthProvider = <Config,>(
 ) => {
   return (props: ComposedProps<Config>) => {
     const elementRef = useRef<HTMLDivElement>(null);
-    const [mounted, setMounted] = useState(false);
+    const mounted = useRef(false);
     const [state, setState] = useState<WPState>({
       width: 1280
     });
@@ -43,7 +43,10 @@ export const WidthProvider = <Config,>(
     const { measureBeforeMount = false } = props;
 
     useEffect(() => {
-      setMounted(true);
+      if (mounted.current) {
+        return;
+      }
+      mounted.current = true;
 
       window.addEventListener("resize", onWindowResize);
       // Call to properly set the breakpoint and resize the elements.
@@ -51,13 +54,13 @@ export const WidthProvider = <Config,>(
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
       onWindowResize();
       return () => {
-        setMounted(false);
+        mounted.current = false;
         window.removeEventListener("resize", onWindowResize);
       };
     }, []);
 
     const onWindowResize = () => {
-      if (!mounted) return;
+      if (!mounted.current) return;
       const node = elementRef.current; // Flow casts this to Text | Element
       // fix: grid position error when node or parentNode display is none by window resize
       // #924 #1084
@@ -66,7 +69,7 @@ export const WidthProvider = <Config,>(
       }
     };
 
-    if (measureBeforeMount && !mounted) {
+    if (measureBeforeMount && !mounted.current) {
       return (
         <div
           className={clsx(props.className, layoutClassName)}

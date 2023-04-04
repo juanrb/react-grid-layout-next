@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 
+
+- `mounted` in WidthProvider is as ref instead of state
+
 ## 2.1.0
 
 - **Breaking** onLayoutChange callback for responsive layout has been changed into an object with properties
