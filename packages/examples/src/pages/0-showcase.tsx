@@ -70,8 +70,8 @@ export default class ShowcaseLayout extends React.Component<Partial<ResponsivePr
 		this.setState({ compactType });
 	};
 
-	onLayoutChange: OnLayoutChangeCallback = (layout, layouts) => {
-		this.props.onLayoutChange?.(layout, layouts);
+	onLayoutChange: OnLayoutChangeCallback = (properties) => {
+		this.props.onLayoutChange?.(properties);
 	};
 
 	onNewLayout: React.MouseEventHandler<HTMLButtonElement> = () => {

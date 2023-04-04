@@ -84,7 +84,7 @@ export type ResponsiveProps<Breakpoint extends string = string> = Modify<
       | undefined;
 
     // Callbacks
-    onBreakpointChange: (Breakpoint, cols: number) => void;
+    onBreakpointChange: (breakpoint: Breakpoint, cols: number) => void;
     onLayoutChange: OnLayoutChangeCallback;
     onWidthChange: (
       containerWidth: number,
@@ -149,9 +149,13 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
 
   // wrap layouts so we do not need to pass layouts to child
   const onLayoutChangeFn: (layout: Layout) => void = (layout: Layout) => {
-    onLayoutChange(layout, {
-      ...layouts,
-      [state.breakpoint]: layout
+    onLayoutChange({
+      layout,
+      layouts: {
+        ...layouts,
+        [state.breakpoint]: layout
+      },
+      breakpoint: state.breakpoint
     });
   };
 
@@ -199,7 +203,11 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       newLayouts[newBreakpoint] = layout;
 
       // callbacks
-      onLayoutChange(layout, newLayouts);
+      onLayoutChange({
+        layout,
+        layouts: newLayouts,
+        breakpoint: state.breakpoint
+      });
       onBreakpointChange(newBreakpoint, newCols);
 
       setState({

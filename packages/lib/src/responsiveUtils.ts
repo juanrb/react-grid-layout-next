@@ -10,8 +10,11 @@ export type ResponsiveLayout<T extends Breakpoint> = Record<T, Layout>;
 export type Breakpoints<T extends Breakpoint> = Record<T, number>;
 
 export type OnLayoutChangeCallback = (
-  layout: Layout,
-  data?: { [key: Breakpoint]: Layout } // TODO should this be optional?
+  propertis: {
+    layout: Layout;
+    breakpoint: Breakpoint;
+    layouts: Record<Breakpoint, Layout>;
+  } // TODO should this be optional?
 ) => void;
 
 /**

@@ -140,9 +140,9 @@ export default class ToolboxLayout extends React.PureComponent<ResponsiveProps &
 		});
 	};
 
-	onLayoutChange = (layout, layouts) => {
-		this.props.onLayoutChange?.(layout, layouts);
-		this.setState({ layouts });
+	onLayoutChange = (properties) => {
+		this.props.onLayoutChange?.(properties);
+		this.setState({ layouts: properties.layouts });
 	};
 
 	onNewLayout = () => {
