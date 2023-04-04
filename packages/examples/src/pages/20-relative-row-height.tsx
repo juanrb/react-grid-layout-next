@@ -5,13 +5,13 @@ import { PropsWithItems } from "./types.js";
 
 const GridLayout = WidthProvider(RGL);
 
-export default class PreserveAspectRatio extends React.PureComponent<PropsWithItems, any> {
+const ROW_HEIGHT_MULTIPLIER = 2;
+export default class RelativeRowHeight extends React.PureComponent<PropsWithItems, any> {
 	static defaultProps = {
 		className: "layout",
-		items: 2,
-		//rowHeight: 1,
+		items: 3,
+		rowHeight: (width: number) => width * ROW_HEIGHT_MULTIPLIER,
 		onLayoutChange: function () { },
-		//cols: 300
 	};
 
 	constructor(props) {
@@ -39,7 +39,7 @@ export default class PreserveAspectRatio extends React.PureComponent<PropsWithIt
 				x: (i * 2) % 12,
 				y: Math.floor(i / 6) * y,
 				w: 2,
-				h: y,
+				h: (i + 1),
 				i: i.toString(),
 				aspectRatio: 1
 			};
@@ -53,10 +53,10 @@ export default class PreserveAspectRatio extends React.PureComponent<PropsWithIt
 	render() {
 		return (
 			<div style={{ height: '750px' }}>
+				<p>Row height is  height * {ROW_HEIGHT_MULTIPLIER} * column width. This property is useful when you want the same relative position of elements on different screen sizes</p>
 				<GridLayout
 					{...this.props}
 					layout={this.state.layout}
-
 					onLayoutChange={this.onLayoutChange.bind(this)}
 					useCSSTransforms={true}
 				>

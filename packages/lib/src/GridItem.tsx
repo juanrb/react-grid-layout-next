@@ -14,7 +14,8 @@ import {
   calcGridColWidth,
   calcXY,
   calcWH,
-  clamp
+  clamp,
+  resolveRowHeight
 } from "./calculateUtils";
 import clsx from "clsx";
 import type { ReactElement, ReactNode } from "react";
@@ -43,7 +44,7 @@ type Props = {
   children: ReactElement<any>;
   margin: [number, number];
   containerPadding: [number, number];
-  rowHeight: number;
+  rowHeight: number | ((width: number) => number);
   maxRows: number;
   isDraggable: boolean;
   isResizable: boolean;
@@ -349,11 +350,15 @@ const GridItem = (props: Props & Partial<DefaultProps>) => {
 
       if (offsetParent) {
         const { margin, rowHeight } = props;
+        const colWidth = calcGridColWidth(positionParams);
+
+        let rowHeightNumber = resolveRowHeight(rowHeight, colWidth);
+
         const bottomBoundary =
-          offsetParent.clientHeight - calcGridItemWHPx(h, rowHeight, margin[1]);
+          offsetParent.clientHeight -
+          calcGridItemWHPx(h, rowHeightNumber, margin[1]);
         top = clamp(top, 0, bottomBoundary);
 
-        const colWidth = calcGridColWidth(positionParams);
         const rightBoundary =
           containerWidth - calcGridItemWHPx(w, colWidth, margin[0]);
         left = clamp(left, 0, rightBoundary);

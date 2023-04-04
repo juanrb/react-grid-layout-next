@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.4
+
+-  Support for row height to be a function of column width
+
 ## 2.1.3
 
 -  `onBreakpointChange` call onLayoutChange with correct breakpoint
