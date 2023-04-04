@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3 
+- Remove default exports
+- Include calculateUtils fns in exports
+
 ## Fork: react-grid-layout-next (2.0.2)
 
 - Rewrite in functional React in Typescript
