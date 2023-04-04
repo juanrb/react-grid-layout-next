@@ -18,7 +18,12 @@ import {
   withLayoutItem
 } from "./utils";
 
-import { calcXY } from "./calculateUtils";
+import {
+  calcGridColWidth,
+  calcXY,
+  resolveRowHeight,
+  RowHeight
+} from "./calculateUtils";
 
 import GridItem, { GridItemCallback } from "./GridItem";
 import type { ReactElement } from "react";
@@ -90,7 +95,7 @@ export type Props = React.PropsWithChildren<{
   layout: Layout;
   margin?: [number, number];
   containerPadding?: [number, number];
-  rowHeight: number;
+  rowHeight: RowHeight;
   maxRows: number;
   isBounded: boolean;
   isDraggable: boolean;
@@ -200,7 +205,7 @@ const GridLayout = (properties: Partial<Props>) => {
     )
   );
   /*     const [compactTypeState, setCompactTypeState] = useState<CompactType>()
-			const [propsLayout, setPropsLayout] = useState<Layout>() */
+			  const [propsLayout, setPropsLayout] = useState<Layout>() */
   const dragEnterCounter = useRef(0);
 
   useEffect(() => {
@@ -224,13 +229,13 @@ const GridLayout = (properties: Partial<Props>) => {
   }, [JSON.stringify(properties.layout)]);
 
   /*   componentDidUpdate(prevProps: Props, prevState: State) {
-			  if (!this.state.activeDrag) {
-				  const newLayout = this.state.layout;
-				  const oldLayout = prevState.layout;
-	  
-				  this.onLayoutMaybeChanged(newLayout, oldLayout);
-			  }
-		  } */
+				if (!this.state.activeDrag) {
+					const newLayout = this.state.layout;
+					const oldLayout = prevState.layout;
+	    
+					this.onLayoutMaybeChanged(newLayout, oldLayout);
+				}
+			} */
 
   useEffect(() => {
     const newLayout = synchronizeLayoutWithChildren(
@@ -255,7 +260,11 @@ const GridLayout = (properties: Partial<Props>) => {
       ? containerPadding[1]
       : margin[1];
     return (
-      nbRow * rowHeight + (nbRow - 1) * margin[1] + containerPaddingY * 2 + "px"
+      nbRow *
+        resolveRowHeight(rowHeight, calcGridColWidth(getPositionParams())) +
+      (nbRow - 1) * margin[1] +
+      containerPaddingY * 2 +
+      "px"
     );
   };
 
@@ -603,6 +612,17 @@ const GridLayout = (properties: Partial<Props>) => {
     );
   };
 
+  const getPositionParams = (): PositionParams => {
+    return {
+      cols,
+      margin,
+      maxRows,
+      rowHeight,
+      containerWidth: width,
+      containerPadding: containerPadding || margin
+    };
+  };
+
   // Called while dragging an element. Part of browser native drag/drop API.
   // Native event target might be the layout itself, or an element within the layout.
   const onDragOverFn: React.DragEventHandler<HTMLDivElement> = e => {
@@ -640,17 +660,8 @@ const GridLayout = (properties: Partial<Props>) => {
     };
 
     if (!droppingDOMNode) {
-      const positionParams: PositionParams = {
-        cols,
-        margin,
-        maxRows,
-        rowHeight,
-        containerWidth: width,
-        containerPadding: containerPadding || margin
-      };
-
       const calculatedPosition = calcXY(
-        positionParams,
+        getPositionParams(),
         layerY,
         layerX,
         finalDroppingItem.w,

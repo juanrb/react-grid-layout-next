@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.6
+
+-  Correct container height from rowHeight function
+
+
 ## 2.1.4
 
 -  Support for row height to be a function of column width
