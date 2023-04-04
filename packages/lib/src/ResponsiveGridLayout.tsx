@@ -205,7 +205,7 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       onLayoutChange({
         layout,
         layouts: newLayouts,
-        breakpoint: state.breakpoint
+        breakpoint: newBreakpoint
       });
       onBreakpointChange(newBreakpoint, newCols);
 
