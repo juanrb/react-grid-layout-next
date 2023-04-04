@@ -4,7 +4,6 @@ import { deepEqual } from "fast-equals";
 import {
   cloneLayout,
   synchronizeLayoutWithChildren,
-  validateLayout,
   noop,
   type Layout
 } from "./utils";
@@ -173,7 +172,7 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
     // Breakpoint change
     if (
       lastBreakpoint !== newBreakpoint ||
-      prevProps.breakpoints !== breakpoints ||
+      !deepEqual(prevProps.breakpoints, breakpoints) ||
       prevProps.cols !== cols
     ) {
       // Preserve the current layout if the current breakpoint is not present in the next layouts.
