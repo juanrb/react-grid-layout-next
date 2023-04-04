@@ -9,3 +9,4 @@ export type {
 } from "./responsiveUtils";
 export * from "./components/WidthProvider";
 export * from "./ResponsiveGridLayout";
+export * from "./calculateUtils";
