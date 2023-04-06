@@ -67,6 +67,7 @@ export const ResponseLayoutNewBreakPoint = () => {
 				onBreakpointChange={(b) => {
 					breakpoint.current = b;
 				}}
+				allowOverlap={true}
 			>
 				{generateDOM()}
 			</ResponsiveGridLayout>

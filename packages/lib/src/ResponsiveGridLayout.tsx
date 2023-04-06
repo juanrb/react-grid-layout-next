@@ -155,8 +155,13 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       emittedBreakpointChangeOnce.current = true;
 
       // Preserve the current layout if the current breakpoint is not present in the next layouts.
-      if (!(lastBreakpoint in newLayouts))
+      if (!(lastBreakpoint in newLayouts)) {
         newLayouts[lastBreakpoint] = cloneLayout(state.layout);
+      }
+
+      const newBreakpointIsBiggerOrEqual =
+        lastBreakpoint === newBreakpoint ||
+        breakpoints[newBreakpoint] > breakpoints[lastBreakpoint];
 
       // Find or generate a new layout.
       let layout = findOrGenerateResponsiveLayout(
@@ -174,7 +179,7 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
         properties.children,
         newCols,
         compactType,
-        properties.allowOverlap
+        properties.allowOverlap && newBreakpointIsBiggerOrEqual //  allow resize overlap only if we are going into a larger screen
       );
 
       // Store the new layout.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.8
+
+-  Only allow overlapping when resizing responsive layout when width grows
+
 ## 2.1.7
 
 -  Make responsive layout to correctly transition between breakpoints to generate missing layouts
