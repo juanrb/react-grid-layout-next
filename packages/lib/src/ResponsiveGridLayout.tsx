@@ -114,14 +114,13 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
   };
 
   const [state, setState] = React.useState<State>(generateInitialState());
-
+  const emittedBreakpointChangeOnce = React.useRef(breakpoint != null);
   React.useEffect(() => {
     setState(generateInitialState());
   }, [JSON.stringify(layouts)]);
   React.useEffect(() => {
     onWidthChangeFn();
   }, [width, breakpoint, JSON.stringify(breakpoints), JSON.stringify(cols)]);
-
   // wrap layouts so we do not need to pass layouts to child
   const onLayoutChangeFn: (layout: Layout) => void = (layout: Layout) => {
     onLayoutChange({
@@ -145,12 +144,16 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
     const newCols: number = getColsFromBreakpoint(newBreakpoint, cols);
     const newLayouts = { ...layouts };
 
+    // console.log(newBreakpoint, lastBreakpoint, width)
     // Breakpoint change
     if (
+      !emittedBreakpointChangeOnce.current ||
       lastBreakpoint !== newBreakpoint ||
       !deepEqual(prevProps.breakpoints, breakpoints) ||
-      prevProps.cols !== cols
+      !deepEqual(prevProps.cols, cols)
     ) {
+      emittedBreakpointChangeOnce.current = true;
+
       // Preserve the current layout if the current breakpoint is not present in the next layouts.
       if (!(lastBreakpoint in newLayouts))
         newLayouts[lastBreakpoint] = cloneLayout(state.layout);
