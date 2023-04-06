@@ -23,6 +23,7 @@ import ResizableHandles from './pages/16-resizable-handles';
 import ScaledLayout from './pages/18-scale';
 import AllowOverlap from './pages/19-allow-overlap';
 import RelativeRowHeight from './pages/20-relative-row-height';
+import { ResponseLayoutNewBreakPoint } from './pages/21-responsive-layout-new-breakpoints';
 interface Examle {
 	t: string,
 	c: ComponentType<any>
@@ -112,6 +113,10 @@ let array: Examle[] = [
 	{
 		t: '20-relative-row-height',
 		c: RelativeRowHeight
+	},
+	{
+		t: '21-responsive-layout-new-breakpoints',
+		c: ResponseLayoutNewBreakPoint
 	}
 ]
 
