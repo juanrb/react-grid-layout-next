@@ -80,20 +80,47 @@ export function findOrGenerateResponsiveLayout(
   compactType: CompactType
 ): Layout {
   // If it already exists, just return it.
-  if (layouts[breakpoint]) return cloneLayout(layouts[breakpoint]);
+  if (layouts[breakpoint]) {
+    const newLayout = cloneLayout(layouts[breakpoint]);
+    /* 	const lastLayout = layouts[lastBreakpoint];
+			if (lastLayout && lastLayout.length !== newLayout.length) {
+				const newLayoutKeys = new Set(newLayout.map(x => x.i));
+				for (const layout of lastLayout) {
+					if (!newLayoutKeys.has(layout.i)) {
+						newLayout.push(layout)
+					}
+				}
+				return compact(correctBounds(newLayout, { cols: cols }), compactType, cols);
+			} */
+    return newLayout;
+  }
   // Find or generate the next layout
   let layout = layouts[lastBreakpoint];
   const breakpointsSorted = sortBreakpoints(breakpoints);
-  const breakpointsAbove = breakpointsSorted.slice(
-    breakpointsSorted.indexOf(breakpoint)
-  );
-  for (let i = 0, len = breakpointsAbove.length; i < len; i++) {
-    const b = breakpointsAbove[i];
+
+  // Above?
+  for (
+    let i = breakpointsSorted.indexOf(breakpoint);
+    i < breakpointsSorted.length;
+    i++
+  ) {
+    const b = breakpointsSorted[i];
     if (layouts[b]) {
       layout = layouts[b];
       break;
     }
   }
+  if (!layout) {
+    // below?
+    for (let i = breakpointsSorted.indexOf(breakpoint) - 1; i >= 0; i--) {
+      const b = breakpointsSorted[i];
+      if (layouts[b]) {
+        layout = layouts[b];
+        break;
+      }
+    }
+  }
+
   layout = cloneLayout(layout || []); // clone layout so we don't modify existing items
   return compact(correctBounds(layout, { cols: cols }), compactType, cols);
 }
