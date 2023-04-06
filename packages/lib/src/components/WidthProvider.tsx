@@ -26,9 +26,6 @@ const layoutClassName = "react-grid-layout";
 
 /*
  * A simple HOC that provides facility for listening to container resizes.
- *
- * The Flow type is pretty janky here. I can't just spread `WPProps` into this returned object - I wish I could - but it triggers
- * a flow bug of some sort that causes it to stop typechecking.
  */
 export const WidthProvider = <Config,>(
   ComposedComponent: React.ComponentType<Config>
@@ -74,7 +71,6 @@ export const WidthProvider = <Config,>(
         <div
           className={clsx(props.className, layoutClassName)}
           style={props.style}
-          // $FlowIgnore ref types
           ref={elementRef}
         />
       );
