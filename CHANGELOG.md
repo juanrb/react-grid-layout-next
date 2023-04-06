@@ -1,9 +1,12 @@
 # Changelog
 
+## 2.1.7
+
+-  Make responsive layout to correctly transition between breakpoints to generate missing layouts
+
 ## 2.1.6
 
 -  Correct container height from rowHeight function
-
 
 ## 2.1.4
 
