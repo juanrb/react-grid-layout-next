@@ -33,15 +33,14 @@ export default class RelativeRowHeight extends React.PureComponent<PropsWithItem
 
 	generateLayout() {
 		const p = this.props;
-		return _.map(new Array(p.items), function (item, i) {
+		return _.map(new Array(), function (item, i) {
 			const y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
 			return {
 				x: (i * 2) % 12,
 				y: Math.floor(i / 6) * y,
 				w: 2,
 				h: (i + 1),
-				i: i.toString(),
-				aspectRatio: 1
+				i: i.toString()
 			};
 		});
 	}
@@ -52,7 +51,7 @@ export default class RelativeRowHeight extends React.PureComponent<PropsWithItem
 
 	render() {
 		return (
-			<div style={{ height: '750px' }}>
+			<div >
 				<p>Row height is  height * {ROW_HEIGHT_MULTIPLIER} * column width. This property is useful when you want the same relative position of elements on different screen sizes</p>
 				<GridLayout
 					{...this.props}
