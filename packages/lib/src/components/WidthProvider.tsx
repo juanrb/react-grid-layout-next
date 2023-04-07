@@ -34,7 +34,7 @@ export const WidthProvider = <Config,>(
     const elementRef = useRef<HTMLDivElement>(null);
     const mounted = useRef(false);
     const [state, setState] = useState<WPState>({
-      width: 1280
+      width: props.width ?? 1280
     });
 
     const { measureBeforeMount = false } = props;
