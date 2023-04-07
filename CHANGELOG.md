@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.10
+
+-  Generated layouts for new breakpoints should conditionally allow overlap
+
 ## 2.1.9
 
 -  Responsive rezising will allow overlap when resizing to smaller screen if layout already exist
