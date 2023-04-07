@@ -51,7 +51,7 @@ export type ResponsiveProps<Breakpoint extends string = string> = Modify<
     breakpoints: Breakpoints<Breakpoint>;
     cols: Record<Breakpoint, number>;
     layouts: ResponsiveLayout<Breakpoint>;
-    width?: number;
+    width: number;
     margin: Record<Breakpoint, [number, number]> | [number, number] | undefined;
     containerPadding:
       | Record<Breakpoint, [number, number]>
@@ -103,7 +103,8 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       breakpoint,
       breakpoint,
       colNo,
-      compactType
+      compactType,
+      false
     );
 
     return {
@@ -131,6 +132,7 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       ...layouts,
       [state.breakpoint]: layout
     };
+
     setState({
       breakpoint: state.breakpoint,
       cols: state.cols,
@@ -178,13 +180,18 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
       const isNewLayout = layouts[newBreakpoint] == null;
 
       // Find or generate a new layout.
+      let overlap =
+        !!properties.allowOverlap &&
+        (!isNewLayout || newBreakpointIsBiggerOrEqual); //  allow resize overlap only if we are going into a larger screen
+
       let layout = findOrGenerateResponsiveLayout(
         newLayouts,
         breakpoints,
         newBreakpoint,
         lastBreakpoint,
         newCols,
-        compactType
+        compactType,
+        overlap
       );
 
       // This adds missing items.
@@ -193,8 +200,7 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
         properties.children,
         newCols,
         compactType,
-        properties.allowOverlap &&
-          (!isNewLayout || newBreakpointIsBiggerOrEqual) //  allow resize overlap only if we are going into a larger screen
+        overlap
       );
 
       // Store the new layout.
@@ -236,7 +242,6 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
   return (
     <GridLayout
       {...properties}
-      // $FlowIgnore should allow nullable here due to DefaultProps
       margin={getIndentationValue(margin, state.breakpoint)}
       containerPadding={getIndentationValue(containerPadding, state.breakpoint)}
       onLayoutChange={onLayoutChangeFn}
