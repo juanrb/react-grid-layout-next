@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.9
+
+-  Responsive rezising will allow overlap when resizing to smaller screen if layout already exist
+
 ## 2.1.8
 
 -  Only allow overlapping when resizing responsive layout when width grows
