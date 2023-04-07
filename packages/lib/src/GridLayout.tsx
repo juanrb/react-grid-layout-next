@@ -5,7 +5,6 @@ import { deepEqual } from "fast-equals";
 import clsx from "clsx";
 import {
   bottom,
-  childrenEqual,
   cloneLayoutItem,
   compact,
   EventCallback,
@@ -195,7 +194,7 @@ const GridLayout = (properties: Partial<Props>) => {
   const [children, setChildren] = useState<React.ReactNode>(
     properties.children
   );
-  const [layout, setLayout] = useState<Layout>(
+  const [layout, setLayout] = useState<Layout>(() =>
     synchronizeLayoutWithChildren(
       properties.layout || [],
       children,
@@ -205,7 +204,7 @@ const GridLayout = (properties: Partial<Props>) => {
     )
   );
   /*     const [compactTypeState, setCompactTypeState] = useState<CompactType>()
-				const [propsLayout, setPropsLayout] = useState<Layout>() */
+				  const [propsLayout, setPropsLayout] = useState<Layout>() */
   const dragEnterCounter = useRef(0);
 
   useEffect(() => {
@@ -227,7 +226,6 @@ const GridLayout = (properties: Partial<Props>) => {
         properties.layout || [],
         children,
         cols,
-        // Legacy support for verticalCompact: false
         compactType,
         allowOverlap
       )
@@ -235,13 +233,13 @@ const GridLayout = (properties: Partial<Props>) => {
   }, [JSON.stringify(properties.layout)]);
 
   /*   componentDidUpdate(prevProps: Props, prevState: State) {
-				  if (!this.state.activeDrag) {
-					  const newLayout = this.state.layout;
-					  const oldLayout = prevState.layout;
-		  
-					  this.onLayoutMaybeChanged(newLayout, oldLayout);
-				  }
-			  } */
+					if (!this.state.activeDrag) {
+						const newLayout = this.state.layout;
+						const oldLayout = prevState.layout;
+		    
+						this.onLayoutMaybeChanged(newLayout, oldLayout);
+					}
+				} */
 
   useEffect(() => {
     const newLayout = synchronizeLayoutWithChildren(
