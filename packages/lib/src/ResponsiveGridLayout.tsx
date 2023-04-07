@@ -51,7 +51,7 @@ export type ResponsiveProps<Breakpoint extends string = string> = Modify<
     breakpoints: Breakpoints<Breakpoint>;
     cols: Record<Breakpoint, number>;
     layouts: ResponsiveLayout<Breakpoint>;
-    width: number;
+    width?: number;
     margin: Record<Breakpoint, [number, number]> | [number, number] | undefined;
     containerPadding:
       | Record<Breakpoint, [number, number]>
@@ -108,27 +108,39 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
 
     return {
       layout: initialLayout,
+      layouts,
       breakpoint: breakpoint,
       cols: colNo
     };
   };
 
-  const [state, setState] = React.useState<State>(generateInitialState());
+  const [state, setState] = React.useState<State>(() => generateInitialState());
   const emittedBreakpointChangeOnce = React.useRef(breakpoint != null);
   React.useEffect(() => {
-    setState(generateInitialState());
+    if (!state || !deepEqual(state.layouts, layouts)) {
+      setState(generateInitialState());
+    }
   }, [JSON.stringify(layouts)]);
+
   React.useEffect(() => {
     onWidthChangeFn();
   }, [width, breakpoint, JSON.stringify(breakpoints), JSON.stringify(cols)]);
   // wrap layouts so we do not need to pass layouts to child
   const onLayoutChangeFn: (layout: Layout) => void = (layout: Layout) => {
+    const newLayouts = {
+      ...layouts,
+      [state.breakpoint]: layout
+    };
+    setState({
+      breakpoint: state.breakpoint,
+      cols: state.cols,
+      layout,
+      layouts: newLayouts
+    });
+
     onLayoutChange({
       layout,
-      layouts: {
-        ...layouts,
-        [state.breakpoint]: layout
-      },
+      layouts: newLayouts,
       breakpoint: state.breakpoint
     });
   };
@@ -163,6 +175,8 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
         lastBreakpoint === newBreakpoint ||
         breakpoints[newBreakpoint] > breakpoints[lastBreakpoint];
 
+      const isNewLayout = layouts[newBreakpoint] == null;
+
       // Find or generate a new layout.
       let layout = findOrGenerateResponsiveLayout(
         newLayouts,
@@ -179,11 +193,20 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
         properties.children,
         newCols,
         compactType,
-        properties.allowOverlap && newBreakpointIsBiggerOrEqual //  allow resize overlap only if we are going into a larger screen
+        properties.allowOverlap &&
+          (!isNewLayout || newBreakpointIsBiggerOrEqual) //  allow resize overlap only if we are going into a larger screen
       );
 
       // Store the new layout.
       newLayouts[newBreakpoint] = layout;
+
+      // Set state has to be before callback fns, so we can do change detection for props.layouts correctly
+      setState({
+        breakpoint: newBreakpoint,
+        layout: layout,
+        layouts: newLayouts,
+        cols: newCols
+      });
 
       // callbacks
       onLayoutChange({
@@ -192,12 +215,6 @@ export const ResponsiveGridLayout = (properties: Partial<ResponsiveProps>) => {
         breakpoint: newBreakpoint
       });
       onBreakpointChange(newBreakpoint, newCols);
-
-      setState({
-        breakpoint: newBreakpoint,
-        layout: layout,
-        cols: newCols
-      });
     }
     setPrevProps({ breakpoints, cols, width });
 
