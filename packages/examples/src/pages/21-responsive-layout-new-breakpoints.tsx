@@ -29,7 +29,7 @@ const generateLayout = (items: number): Record<Breakpoint, Layout> => {
 
 export const ResponseLayoutNewBreakPoint = () => {
 	const [items, setItems] = useState(2)
-	const [layouts, setLayouts] = useState(generateLayout(items))
+	const [layouts, setLayouts] = useState(() => generateLayout(items))
 	const breakpoint = useRef<Breakpoint>()
 
 	const generateDOM = () => {
