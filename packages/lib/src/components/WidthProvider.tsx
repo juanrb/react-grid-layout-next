@@ -1,16 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 
-type WPDefaultProps = {
-  measureBeforeMount: boolean;
-};
-
-// eslint-disable-next-line no-unused-vars
-type WPProps = {
-  className?: string;
-  style?: Object;
-} & WPDefaultProps;
-
 type WPState = {
   width: number;
 };
