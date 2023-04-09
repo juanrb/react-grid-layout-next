@@ -82,6 +82,12 @@ export type ResizeHandleAxesType = (
 // Custom component for resize handles
 export type ResizeHandleType = React.ReactNode | React.FunctionComponent;
 
+export type DroppedEvent = {
+  layout: Layout;
+  item?: LayoutItem;
+  event?: React.DragEvent<HTMLDivElement>;
+};
+
 export type Props = React.PropsWithChildren<{
   className: string;
   style: Object;
@@ -119,11 +125,7 @@ export type Props = React.PropsWithChildren<{
   onDropDragOver: (
     e: DragOverEvent
   ) => ({ w?: number; h?: number } | false) | undefined | void;
-  onDrop: (
-    layout: Layout,
-    item?: LayoutItem,
-    e?: React.DragEvent<HTMLDivElement>
-  ) => void;
+  onDrop: (properties: DroppedEvent) => void;
   innerRef?: React.Ref<HTMLDivElement>;
 }>;
 
@@ -204,7 +206,7 @@ const GridLayout = (properties: Partial<Props>) => {
     )
   );
   /*     const [compactTypeState, setCompactTypeState] = useState<CompactType>()
-				  const [propsLayout, setPropsLayout] = useState<Layout>() */
+					const [propsLayout, setPropsLayout] = useState<Layout>() */
   const dragEnterCounter = useRef(0);
 
   useEffect(() => {
@@ -233,13 +235,13 @@ const GridLayout = (properties: Partial<Props>) => {
   }, [JSON.stringify(properties.layout)]);
 
   /*   componentDidUpdate(prevProps: Props, prevState: State) {
-					if (!this.state.activeDrag) {
-						const newLayout = this.state.layout;
-						const oldLayout = prevState.layout;
-		    
-						this.onLayoutMaybeChanged(newLayout, oldLayout);
-					}
-				} */
+					  if (!this.state.activeDrag) {
+						  const newLayout = this.state.layout;
+						  const oldLayout = prevState.layout;
+			  
+						  this.onLayoutMaybeChanged(newLayout, oldLayout);
+					  }
+				  } */
 
   useEffect(() => {
     const newLayout = synchronizeLayoutWithChildren(
@@ -286,14 +288,14 @@ const GridLayout = (properties: Partial<Props>) => {
 
     setOldDragItem(cloneLayoutItem(l));
     setOldLayout(layout);
-    return onDragStart(
+    return onDragStart({
       layout,
-      l,
-      l,
-      undefined,
-      properties.data.e,
-      properties.data.node
-    );
+      prev: l,
+      item: l,
+      placeholder: undefined,
+      event: properties.data.e,
+      node: properties.data.node
+    });
   };
 
   /**
@@ -333,14 +335,14 @@ const GridLayout = (properties: Partial<Props>) => {
       allowOverlap
     });
 
-    onDrag(
-      newLayout,
-      oldDragItem,
-      l,
+    onDrag({
+      layout: newLayout,
+      prev: oldDragItem,
+      item: l,
       placeholder,
-      properties.data.e,
-      properties.data.node
-    );
+      event: properties.data.e,
+      node: properties.data.node
+    });
 
     setLayout(allowOverlap ? newLayout : compact(newLayout, compactType, cols));
     setActiveDrag(placeholder);
@@ -377,14 +379,14 @@ const GridLayout = (properties: Partial<Props>) => {
     if (properties.data.change) {
     }
 
-    onDragStop(
-      movedLayout,
-      oldDragItem,
-      l,
-      undefined,
-      properties.data.e,
-      properties.data.node
-    );
+    onDragStop({
+      layout: movedLayout,
+      prev: oldDragItem,
+      item: l,
+      placeholder: undefined,
+      event: properties.data.e,
+      node: properties.data.node
+    });
 
     // Set state
     const newLayout = allowOverlap
@@ -414,14 +416,13 @@ const GridLayout = (properties: Partial<Props>) => {
 
     setOldresizeItem(cloneLayoutItem(l));
     setOldLayout(layout);
-    onResizeStart(
+    onResizeStart({
       layout,
-      l,
-      l,
-      undefined,
-      properties.data.e,
-      properties.data.node
-    );
+      prev: l,
+      item: l,
+      event: properties.data.e,
+      node: properties.data.node
+    });
   };
 
   const onResizeFn: GridItemCallback<GridResizeEvent> = properties => {
@@ -475,14 +476,14 @@ const GridLayout = (properties: Partial<Props>) => {
       i: properties.i
     };
 
-    onResize(
-      newLayout,
-      oldResizeItem,
-      l,
+    onResize({
+      layout: newLayout,
+      prev: oldResizeItem,
+      item: l,
       placeholder,
-      properties.data.e,
-      properties.data.node
-    );
+      event: properties.data.e,
+      node: properties.data.node
+    });
 
     // Re-compact the newLayout and set the drag placeholder.
     setLayout(allowOverlap ? newLayout : compact(newLayout, compactType, cols));
@@ -491,14 +492,13 @@ const GridLayout = (properties: Partial<Props>) => {
 
   const onResizeStopFn: GridItemCallback<GridResizeEvent> = properties => {
     const l = getLayoutItem(layout, properties.i);
-    onResizeStop(
+    onResizeStop({
       layout,
-      oldResizeItem,
-      l,
-      undefined,
-      properties.data.e,
-      properties.data.node
-    );
+      prev: oldResizeItem,
+      item: l,
+      event: properties.data.e,
+      node: properties.data.node
+    });
 
     // Set state
     const newLayout = allowOverlap
@@ -738,7 +738,7 @@ const GridLayout = (properties: Partial<Props>) => {
 
     removeDroppingPlaceholder();
 
-    onDrop(layout, item, e);
+    onDrop({ layout, item, event: e });
   };
 
   const mergedClassName = clsx(layoutClassName, className);

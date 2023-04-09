@@ -52,17 +52,18 @@ export default class DynamicMinMaxLayout extends React.PureComponent<PropsWithIt
 		this.props.onLayoutChange?.(layout);
 	}
 
-	onResize(layout, oldLayoutItem, layoutItem, placeholder) {
+	onResize(properties) {
+		const { item, placeholder } = properties
 		// `oldLayoutItem` contains the state of the item before the resize.
 		// You can modify `layoutItem` to enforce constraints.
 
-		if (layoutItem.h < 3 && layoutItem.w > 2) {
-			layoutItem.w = 2;
+		if (item.h < 3 && item.w > 2) {
+			item.w = 2;
 			placeholder.w = 2;
 		}
 
-		if (layoutItem.h >= 3 && layoutItem.w < 2) {
-			layoutItem.w = 2;
+		if (item.h >= 3 && item.w < 2) {
+			item.w = 2;
 			placeholder.w = 2;
 		}
 	}

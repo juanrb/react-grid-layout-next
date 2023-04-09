@@ -18,19 +18,7 @@ export default class BootstrapStyleLayout extends React.PureComponent<Responsive
 
 	render() {
 		return (
-			<ResponsiveGridLayout
-				{...this.props}
-				onLayoutChange={this.props.onLayoutChange}
-			>
-				<div
-					data-grid={{
-						w: { lg: 6, md: 5, sm: 3, xs: 4, xxs: 2 },
-						h: { lg: 4, xxs: 3 }
-					}}
-				>
-					0
-				</div>
-			</ResponsiveGridLayout>
+			<>TODO?</>
 		);
 	}
 }

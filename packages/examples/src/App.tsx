@@ -19,7 +19,7 @@ import ToolboxLayout from './pages/13-toolbox';
 import DragFromOutsideLayout from './pages/14-drag-from-outside';
 import { BoundedLayout } from './pages/15-bounded';
 import BootstrapStyleLayout from './pages/17-responsive-bootstrap-style';
-import ResizableHandles from './pages/16-resizable-handles';
+import ResizableHandles from './pages/16-resizable-handles/16-resizable-handles';
 import ScaledLayout from './pages/18-scale';
 import AllowOverlap from './pages/19-allow-overlap';
 import RelativeRowHeight from './pages/20-relative-row-height';

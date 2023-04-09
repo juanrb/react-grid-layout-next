@@ -9,9 +9,9 @@ const ROW_HEIGHT_MULTIPLIER = 2;
 export default class RelativeRowHeight extends React.PureComponent<PropsWithItems, any> {
 	static defaultProps = {
 		className: "layout",
-		items: 3,
-		rowHeight: (width: number) => width * ROW_HEIGHT_MULTIPLIER,
-		onLayoutChange: function () { },
+		items: 2,
+		cols: 4,
+		rowHeight: (width: number) => width * ROW_HEIGHT_MULTIPLIER
 	};
 
 	constructor(props) {
@@ -32,22 +32,17 @@ export default class RelativeRowHeight extends React.PureComponent<PropsWithItem
 	}
 
 	generateLayout() {
-		const p = this.props;
-		return _.map(new Array(), function (item, i) {
-			const y = _.result(p, "y") || Math.ceil(Math.random() * 4) + 1;
+		return _.map(new Array(this.props.items), function (item, i) {
 			return {
-				x: (i * 2) % 12,
-				y: Math.floor(i / 6) * y,
-				w: 2,
+				x: i,
+				y: 0,
+				w: 1,
 				h: (i + 1),
 				i: i.toString()
 			};
 		});
 	}
 
-	onLayoutChange(layout) {
-		this.props.onLayoutChange?.(layout);
-	}
 
 	render() {
 		return (
@@ -56,8 +51,8 @@ export default class RelativeRowHeight extends React.PureComponent<PropsWithItem
 				<GridLayout
 					{...this.props}
 					layout={this.state.layout}
-					onLayoutChange={this.onLayoutChange.bind(this)}
 					useCSSTransforms={true}
+					onLayoutChange={(e) => { console.log(e) }}
 				>
 					{this.generateDOM()}
 				</GridLayout>

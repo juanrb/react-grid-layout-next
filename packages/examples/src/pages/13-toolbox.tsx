@@ -147,6 +147,7 @@ export default class ToolboxLayout extends React.PureComponent<ResponsiveProps &
 
 	onNewLayout = () => {
 		this.setState({
+			currentBreakpoint: 'lg',
 			layouts: { lg: generateLayout() }
 		});
 	};

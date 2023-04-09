@@ -70,14 +70,14 @@ export type DragOverEvent = MouseEvent & {
 export type ReactChildren = ReactNode;
 
 // All callbacks are of the signature (layout, oldItem, newItem, placeholder, e).
-export type EventCallback = (
-  layout: Layout,
-  oldItem?: LayoutItem,
-  newItem?: LayoutItem,
-  placeholder?: LayoutItem,
-  event?: Event,
-  node?: HTMLElement
-) => void;
+export type EventCallback = (properties: {
+  layout: Layout;
+  prev?: LayoutItem;
+  item?: LayoutItem;
+  placeholder?: LayoutItem;
+  event?: Event;
+  node?: HTMLElement;
+}) => void;
 export type CompactType = "horizontal" | "vertical" | undefined;
 
 const isProduction = process.env.NODE_ENV === "production";

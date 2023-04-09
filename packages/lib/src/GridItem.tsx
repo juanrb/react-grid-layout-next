@@ -469,7 +469,7 @@ const GridItem = (props: Props & Partial<DefaultProps>) => {
     // Get new XY
     let { w, h } = calcWH(getPositionParams(), size.width, size.height, x, y);
 
-    // minW should be at least 1 (TODO propTypes validation?)
+    // minW should be at least 1
     minW = Math.max(minW, 1);
 
     // maxW should be at most (cols - x)

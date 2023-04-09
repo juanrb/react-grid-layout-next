@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+
+-  **Breaking**: Resize and drag callback functions now take parameters as an object rather than a list of args.
+
 ## 2.1.10
 
 -  Generated layouts for new breakpoints should conditionally allow overlap

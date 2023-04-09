@@ -80,8 +80,8 @@ export default class ShowcaseLayout extends React.Component<Partial<ResponsivePr
 		});
 	};
 
-	onDrop: (layout: Layout, item?: LayoutItem) => void = (elemParams) => {
-		alert(`Element parameters: ${JSON.stringify(elemParams)}`);
+	onDrop: (properties: { layout: Layout, item?: LayoutItem }) => void = (properties) => {
+		alert(`Element parameters: ${JSON.stringify(properties.item)}`);
 	};
 
 	render(): React.ReactNode {

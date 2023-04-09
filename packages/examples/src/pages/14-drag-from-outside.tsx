@@ -64,8 +64,8 @@ export default class DragFromOutsideLayout extends React.PureComponent<Partial<R
 		});
 	};
 
-	onDrop = (layout, layoutItem, _event) => {
-		alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
+	onDrop = (properties) => {
+		alert(`Dropped element props:\n${JSON.stringify(properties.item, ['x', 'y', 'w', 'h'], 2)}`);
 	};
 
 	render() {
