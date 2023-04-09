@@ -1,0 +1,67 @@
+.react-grid-item>.custom-react-resizable-handle {
+	position: absolute;
+	border: 1px solid gray;
+	border-radius: 2px;
+	width: 10px;
+	height: 10px;
+
+}
+
+.react-resizable-hide>.custom-react-resizable-handle {
+	display: none;
+}
+
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-sw {
+	bottom: -5px;
+	left: -5px;
+	cursor: sw-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-se {
+	bottom: -5px;
+	right: -5px;
+	cursor: se-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-nw {
+	top: -5px;
+	left: -5px;
+	cursor: nw-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-ne {
+	top: -5px;
+	right: -5px;
+	cursor: ne-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-w,
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-e {
+	top: 50%;
+	/* margin-top: -10px; */
+	cursor: ew-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-w {
+	left: -5px;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-e {
+	right: -5px;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-n,
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-s {
+	left: 50%;
+	/* margin-left: -10px; */
+	cursor: ns-resize;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-n {
+	top: -5px;
+}
+
+.react-grid-item>.custom-react-resizable-handle.custom-react-resizable-handle-s {
+	bottom: -5px;
+}
