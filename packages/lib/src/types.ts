@@ -1,8 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement, RefObject } from "react";
 
-export type ReactRef<T extends HTMLElement> = {
-  current: T | null;
-};
 export type ResizeHandleAxis =
   | "s"
   | "w"
@@ -16,5 +13,5 @@ export type ResizeHandle =
   | ReactElement<any>
   | ((
       resizeHandleAxis: ResizeHandleAxis,
-      ref: ReactRef<HTMLElement>
+      ref: RefObject<HTMLElement>
     ) => ReactElement<any>);
