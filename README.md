@@ -6,6 +6,37 @@
 - Z-index for better handling of overlapping grid items
 - Faster iteration on new features
 
+
+## Examples
+
+How to run the examples: 
+
+Clone the repo
+
+```sh
+git clone https://github.com/dao-xyz/react-grid-layout-next
+```
+
+In the root folder
+
+```sh
+yarn install
+```
+
+```sh
+yarn lerna bootstrap
+``` 
+
+```sh
+cd packages/examples
+```
+
+```sh
+yarn start
+```
+
+
+
 ---
 
 [![CDNJS](https://img.shields.io/cdnjs/v/react-grid-layout-next.svg)](https://cdnjs.com/libraries/react-grid-layout-next)
