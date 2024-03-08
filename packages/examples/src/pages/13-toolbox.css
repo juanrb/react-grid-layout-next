@@ -1,0 +1,39 @@
+body {
+	background-color: #131516;
+}
+
+.react-grid-item {
+	background-color: #131516;
+	border: thin solid #363839;
+	border-radius: 3px;
+}
+
+.react-grid-item .text {
+	color: white;
+	padding: 5px;
+}
+
+.react-grid-item .react-resizable-handle {
+	filter: grayscale(100%);
+	padding: 5px;
+}
+
+.hide-button {
+	border-bottom: thin solid #333333;
+	color: transparent;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 5px;
+}
+
+.hide-button.dynamic {
+	&:hover {
+		color: white;
+	}
+}
+
+.hide-button.dynamic .close {
+	&:hover {
+		cursor: pointer;
+	}
+}

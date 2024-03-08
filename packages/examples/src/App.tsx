@@ -30,94 +30,94 @@ interface Examle {
 }
 
 let array: Examle[] = [
-	{
-		t: '0-Showcase',
-		c: ShowcaseLayout
-	},
-	{
-		t: '1-Basic-layout',
-		c: BasicLayout
-	},
-	{
-		t: '2-no-dragging',
-		c: NoDraggingLayout
-	},
-	{
-		t: '3-messy',
-		c: MessyLayout
-	},
-	{
-		t: '4-grid-property',
-		c: GridPropertyLayout
-	},
-	{
-		t: '5-static-elements',
-		c: StaticElementsLayout
-	},
-	{
-		t: '6-dynamic-add-remove',
-		c: AddRemoveLayout
-	},
-	{
-		t: '7-localstorage',
-		c: LocalStorageLayout
-	},
-	{
-		t: '8-localstorage-responsive',
-		c: ResponsiveLocalStorageLayout
-	},
-	{
-		t: '9-min-max-wh',
-		c: MinMaxLayout
-	},
-	{
-		t: '10-dynamic-min-max-wh',
-		c: DynamicMinMaxLayout
-	},
-	{
-		t: '11-prevent-collision',
-		c: NoCollisionLayout
-	},
-	{
-		t: '12-error-case',
-		c: ErrorCaseLayout
-	},
+	// {
+	// 	t: '0-Showcase',
+	// 	c: ShowcaseLayout
+	// },
+	// {
+	// 	t: '1-Basic-layout',
+	// 	c: BasicLayout
+	// },
+	// {
+	// 	t: '2-no-dragging',
+	// 	c: NoDraggingLayout
+	// },
+	// {
+	// 	t: '3-messy',
+	// 	c: MessyLayout
+	// },
+	// {
+	// 	t: '4-grid-property',
+	// 	c: GridPropertyLayout
+	// },
+	// {
+	// 	t: '5-static-elements',
+	// 	c: StaticElementsLayout
+	// },
+	// {
+	// 	t: '6-dynamic-add-remove',
+	// 	c: AddRemoveLayout
+	// },
+	// {
+	// 	t: '7-localstorage',
+	// 	c: LocalStorageLayout
+	// },
+	// {
+	// 	t: '8-localstorage-responsive',
+	// 	c: ResponsiveLocalStorageLayout
+	// },
+	// {
+	// 	t: '9-min-max-wh',
+	// 	c: MinMaxLayout
+	// },
+	// {
+	// 	t: '10-dynamic-min-max-wh',
+	// 	c: DynamicMinMaxLayout
+	// },
+	// {
+	// 	t: '11-prevent-collision',
+	// 	c: NoCollisionLayout
+	// },
+	// {
+	// 	t: '12-error-case',
+	// 	c: ErrorCaseLayout
+	// },
 	{
 		t: '13-toolbox',
 		c: ToolboxLayout
 	},
-	{
-		t: '14-drag-from-outside',
-		c: DragFromOutsideLayout
-	},
-	{
-		t: '15-bounded',
-		c: BoundedLayout
-	},
-	{
-		t: '16-resizable-handles',
-		c: ResizableHandles
-	},
-	{
-		t: '17-responsive-bootstrap-style',
-		c: BootstrapStyleLayout
-	},
-	{
-		t: '18-scale',
-		c: ScaledLayout
-	},
-	{
-		t: '19-allow-overlap',
-		c: AllowOverlap
-	},
-	{
-		t: '20-relative-row-height',
-		c: RelativeRowHeight
-	},
-	{
-		t: '21-responsive-layout-new-breakpoints',
-		c: ResponseLayoutNewBreakPoint
-	}
+	// {
+	// 	t: '14-drag-from-outside',
+	// 	c: DragFromOutsideLayout
+	// },
+	// {
+	// 	t: '15-bounded',
+	// 	c: BoundedLayout
+	// },
+	// {
+	// 	t: '16-resizable-handles',
+	// 	c: ResizableHandles
+	// },
+	// {
+	// 	t: '17-responsive-bootstrap-style',
+	// 	c: BootstrapStyleLayout
+	// },
+	// {
+	// 	t: '18-scale',
+	// 	c: ScaledLayout
+	// },
+	// {
+	// 	t: '19-allow-overlap',
+	// 	c: AllowOverlap
+	// },
+	// {
+	// 	t: '20-relative-row-height',
+	// 	c: RelativeRowHeight
+	// },
+	// {
+	// 	t: '21-responsive-layout-new-breakpoints',
+	// 	c: ResponseLayoutNewBreakPoint
+	// }
 ]
 
 function App() {

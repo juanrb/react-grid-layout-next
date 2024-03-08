@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import { ResponsiveGridLayout as RGL, WidthProvider, ResponsiveProps } from "react-grid-layout-next";
+import './13-toolbox.css'
 
 const ResponsiveGridLayout = WidthProvider(RGL);
 
@@ -60,8 +61,10 @@ export default class ToolboxLayout extends React.PureComponent<ResponsiveProps &
 		return _.map(this.state.layouts[this.state.currentBreakpoint], l => {
 			return (
 				<div key={l.i} className={l.static ? "static" : ""}>
-					<div className="hide-button" onClick={this.onPutItem.bind(this, l)}>
-						&times;
+					<div className={l.static ? "hide-button" : "hide-button dynamic"}>
+						<div className="fullscreen">[o]</div>
+						<div className="close" onClick={l.static ? null: this.onPutItem.bind(this, l)}>x</div>
+						{/* &times; */}
 					</div>
 					{l.static ? (
 						<span
